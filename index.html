@@ -158,14 +158,14 @@
                 extend: {
                     colors: {
                         primary: {
-                            DEFAULT: '#6a11cb',
-                            dark: '#a855f7'
-                        },
-                        secondary: {
                             DEFAULT: '#2575fc',
                             dark: '#60a5fa'
                         },
-                        'primary-dark': '#a855f7',
+                        secondary: {
+                            DEFAULT: '#2575fc',
+                            dark: '60a5fa'
+                        },
+                        'primary-dark': '#2575fc',
                         'secondary-dark': '#60a5fa'
                     },
                     fontFamily: {
@@ -196,7 +196,7 @@
                 -webkit-text-fill-color: transparent;
             }
             .bg-gradient-custom {
-                background: linear-gradient(135deg, #6a11cb, #2575fc);
+                background: linear-gradient(135deg, #035df8, #2575fc);
             }
             .card-hover {
                 transition: all 0.3s ease;
@@ -222,7 +222,7 @@
                 left: 0;
                 right: 0;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, #6a11cb, transparent);
+                background: linear-gradient(90deg, transparent, #60a5fa, transparent);
                 animation: border-glow 4s ease-in-out infinite;
             }
             .glass-panel::before {
@@ -232,12 +232,12 @@
                 left: 0;
                 right: 0;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, #2575fc, transparent);
+                background: linear-gradient(90deg, transparent, #60a5fa, transparent);
                 animation: border-glow 4s ease-in-out infinite reverse;
             }
             /* 深色模式下的边框光效 */
             .dark .glass-panel::after {
-                background: linear-gradient(90deg, transparent, #a855f7, transparent);
+                background: linear-gradient(90deg, transparent, #60a5fa, transparent);
             }
             .dark .glass-panel::before {
                 background: linear-gradient(90deg, transparent, #60a5fa, transparent);
@@ -323,10 +323,10 @@
         }
         @keyframes glow {
             from {
-                box-shadow: 0 0 5px rgba(106, 17, 203, 0.3);
+                box-shadow: 0 0 5px #60a5fa;
             }
             to {
-                box-shadow: 0 0 20px rgba(106, 17, 203, 0.8);
+                box-shadow: 0 0 20px #60a5fa;
             }
         }
         .animate-fade-in {
@@ -350,7 +350,7 @@
             transform: translateX(5px);
         }
         .tech-icon {
-            filter: drop-shadow(0 0 5px rgba(106, 17, 203, 0.5));
+            filter: drop-shadow(0 0 5px #60a5fa);
         }
     </style>
 </head>
@@ -416,7 +416,7 @@
                             href="https://github.com/xingyuefox" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-custom text-white font-medium hover:opacity-90 transition-opacity"
+                            class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-white font-medium hover:opacity-90 transition-opacity"
                         >
                             <i class="fa-brands fa-github mr-2"></i>
                             访问我的 GitHub
@@ -448,17 +448,16 @@
                                     <i class="fa-solid fa-code mr-1 tech-icon"></i>
                                     Python
                                 </span>
-                            
+                                                        
+                                <span class="px-3 py-1 rounded-full text-sm flex items-center text-white dark:text-white" style="background-color: #2e6dff;">
+                                    <i class="fa-solid fa-code mr-1 tech-icon"></i>
+                                    JavaScript
+                                </span>
+
                                 <span class="px-3 py-1 rounded-full text-sm flex items-center text-white dark:text-white" style="background-color: gray;">
                                     <i class="fa-solid fa-code mr-1 tech-icon"></i>
                                     Shell
-                                </span>
-                            
-                                <span class="px-3 py-1 rounded-full text-sm flex items-center text-white dark:text-white" style="background-color: gray;">
-                                    <i class="fa-solid fa-code mr-1 tech-icon"></i>
-                                    Batchfile
-                                </span>
-                            
+                                </span>                          
                         
                     </div>
                 </div>
@@ -589,7 +588,7 @@
     <!-- 页脚 -->
     <footer class="glass-panel bg-white/30 dark:bg-gray-800/30 shadow-inner py-6">
         <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
-            <p>© 2026 星月_Fox. 由 Flask + Tailwind CSS 驱动。</p>
+            <p>© 2026 星月_Fox.</p><!--备份<p>© 2026 星月_Fox. 由 Flask + Tailwind CSS 驱动。</p>-->
             <div class="mt-3 space-x-4">
                 <!-- 联系方式图标，仅在配置了有效URL时显示 -->
                 
@@ -710,8 +709,8 @@
                         datasets: [{
                             label: '代码提交',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3],
-                            borderColor: isDark ? '#a855f7' : '#6a11cb',
-                            backgroundColor: isDark ? 'rgba(168, 85, 247, 0.1)' : 'rgba(106, 17, 203, 0.1)',
+                            borderColor: isDark ? '#2575fc' : '#2575fc',
+                            backgroundColor: isDark ? 'rgba(96, 165, 250, 0.3)' : 'rgba(96, 165, 250, 0.3)',
                             tension: 0.4,
                             fill: true
                         }]
