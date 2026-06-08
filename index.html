@@ -229,7 +229,7 @@
           -webkit-text-fill-color: transparent;
         }
         .bg-gradient-custom {
-          background: linear-gradient(135deg, #6d03f8, #035df8, #ff3cff, #ff6f2c);/*头像框下按钮颜色*/
+          background: linear-gradient(135deg, #035df8);/*头像框下按钮颜色 #6d03f8,, #ff3cff, #ff6f2c*/
         }
         .card-hover {
           transition: all 0.3s ease;
@@ -245,8 +245,8 @@
           background: rgba(255, 255, 255, 0.6);
           backdrop-filter: blur(25px);
           -webkit-backdrop-filter: blur(25px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
           position: relative;
           overflow: hidden;
         }
@@ -257,7 +257,7 @@
           left: 0;
           right: 0;
           height: 1px;
-          background: linear-gradient(90deg, transparent, #60a5fa80, transparent);
+          background: linear-gradient(90deg, transparent, #ffffffc4, transparent);
           animation: border-glow 5s ease-in-out infinite;
         }
         .glass-panel::before {
@@ -267,19 +267,19 @@
           left: 0;
           right: 0;
           height: 1px;
-          background: linear-gradient(90deg, transparent, #60a5fa00, transparent);
+          background: linear-gradient(90deg, transparent, #ffffffc4, transparent);
           animation: border-glow 5s ease-in-out infinite reverse;
         }
         /* 深色模式下的边框光效 */
         .dark .glass-panel::after {
-          background: linear-gradient(90deg, transparent, #60a5fa80, transparent);
+          background: linear-gradient(90deg, transparent, #ffffff1f, transparent);
         }
         .dark .glass-panel::before {
-          background: linear-gradient(90deg, transparent, #60a5fa00, transparent);
+          background: linear-gradient(90deg, transparent, #ffffff1f, transparent);
         }
         .dark .glass-panel {
           background: rgba(17, 24, 39, 0.749);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(179, 179, 179, 0.1);
           box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         @keyframes border-glow {
@@ -354,10 +354,10 @@
       }
       @keyframes glow {
         from {
-          box-shadow: 0 0 5px rgba(188, 81, 255, 0.29);
+          box-shadow: 0 0 5px rgba(255, 255, 255, 0.139);
         }
         to {
-          box-shadow: 0 0 20px #7648ff60;
+          box-shadow: 0 0 20px #ffffff36;
         }
       }
       .animate-fade-in {
@@ -480,7 +480,7 @@
                 href="https://space.bilibili.com/3493117999188634"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-white font-medium hover:opacity-90 transition-opacity"
+                class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-blue-200 font-medium hover:opacity-90 transition-opacity"
               >
                 <i class="fa-brands fa-bilibili mr-2"></i>
                 访问我的 Bilibili
@@ -518,24 +518,24 @@
               <h3 class="text-lg font-semibold mb-3">技术栈</h3>
               <div class="flex flex-wrap gap-2">
                 <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-gray-800 dark:text-gray-200"
-                  style="background-color: #80808030"#0e2e64
+                  class="px-3 py-1 rounded-full text-sm flex items-center text-blue-800 dark:text-blue-300"
+                  style="background-color: #0e2e6419"#80808030
                 >
                   <i class="fa-solid fa-code mr-1 tech-icon"></i>
                   HTML/CSS
                 </span>
 
                 <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-gray-800 dark:text-gray-200"
-                  style="background-color: #80808030"#6a11cb
+                  class="px-3 py-1 rounded-full text-sm flex items-center text-violet-700 dark:text-violet-200"
+                  style="background-color: #6a11cb19"#80808030
                 >
                   <i class="fa-solid fa-code mr-1 tech-icon"></i>
                   Python
                 </span>
 
                 <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-gray-800 dark:text-gray-200"
-                  style="background-color: #80808030"#2e6dff
+                  class="px-3 py-1 rounded-full text-sm flex items-center text-blue-500 dark:text-blue-200"
+                  style="background-color: #2e6dff19"#80808030
                 >
                   <i class="fa-solid fa-code mr-1 tech-icon"></i>
                   JavaScript
@@ -677,7 +677,7 @@
 
 
                <h3 id="recently">🚧维护概览</h3>
-              <ul>最后维护于2026/06/07</ul>
+              <ul>最后维护于2026/06/08</ul>
               <ul>[6月更新]此次为2026年第2号季度累积更新</ul>
 
             </div>
@@ -712,7 +712,7 @@
                     class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
                   >
                     <i class="fa-solid fa-columns mr-1"></i>
-                    1分钟内
+                    3分钟内
                   </span>
                 </div>
                 <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
@@ -723,7 +723,7 @@
                 >
                   <span>Google Drive</span>
                   <span class="update-date" data-date="2026-02-24T19:21:04Z"
-                    >更新于 2026-06-06</span
+                    >更新于 2026-06-08</span
                   >
                 </div>
               </a>
@@ -745,7 +745,7 @@
                     class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
                   >
                     <i class="fa-solid fa-columns mr-1"></i>
-                    5分钟
+                    10分钟内
                   </span>
                 </div>
                 <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
@@ -756,7 +756,7 @@
                 >
                   <span>Google Drive</span>
                   <span class="update-date" data-date="2026-02-11T00:50:26Z"
-                    >更新于 2026-06-06</span
+                    >更新于 2026-06-08</span
                   >
                 </div>
               </a>
@@ -778,7 +778,7 @@
                     class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
                   >
                     <i class="fa-solid fa-star mr-1"></i>
-                    
+                    Null
                   </span>
                 </div>
                 <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
