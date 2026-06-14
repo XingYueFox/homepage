@@ -3,17 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>星月Fox的主页</title>
-    <!-- 网页图标，使用用户头像并确保是圆形的 -->
-
+    <title data-i18n="html_title">星月Fox的主页</title>
     <link
       rel="icon"
       href="img/profile/profile_xingyue_fox.jpg"
       type="image/png"
     />
-    <!--原href="https://avatars.githubusercontent.com/u/166911432?v=4"-->
-    
-    <!-- 使用SVG过滤器确保头像显示为圆形 -->
     <svg width="0" height="0" style="position: absolute">
       <filter id="roundAvatar">
         <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
@@ -32,16 +27,12 @@
       }
     </style>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      href="lib/fa/css/all.min.css"
       rel="stylesheet"
     />
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <!-- Tailwind Typography Plugin -->
     <script>
       // 应用 Markdown 样式的函数
       function applyMarkdownStyles() {
@@ -91,19 +82,19 @@
           pElements.forEach((el) => {
             if (!el.className.includes("text-gray")) {
               el.className =
-                "mb-4 text-gray-700 dark:text-gray-300 leading-relaxed";
+                "mb-4 text-gray-700 dark:text-gray-300 leading-relaxed text-base";
             }
           });
           ulElements.forEach((el) => {
             if (!el.className.includes("list-disc")) {
               el.className =
-                "list-disc list-inside mb-4 ml-4 text-gray-700 dark:text-gray-300 space-y-1";
+                "list-disc list-inside mb-4 ml-4 text-gray-700 dark:text-gray-300 space-y-1 text-base";
             }
           });
           olElements.forEach((el) => {
             if (!el.className.includes("list-decimal")) {
               el.className =
-                "list-decimal list-inside mb-4 ml-4 text-gray-700 dark:text-gray-300 space-y-1";
+                "list-decimal list-inside mb-4 ml-4 text-gray-700 dark:text-gray-300 space-y-1 text-base";
             }
           });
           liElements.forEach((el) => {
@@ -126,10 +117,11 @@
                 "bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4 text-sm";
             }
           });
+          //链接文本颜色
           aElements.forEach((el) => {
             if (!el.className.includes("text-blue")) {
               el.className =
-                "text-blue-600 dark:text-blue-400 hover:underline font-semibold";
+                "text-blue-950 dark:text-blue-100 hover:underline font-semibold";
             }
           });
           imgElements.forEach((el) => {
@@ -156,7 +148,6 @@
             }
           });
 
-          // 为 table 的 th 和 td 添加样式
           const thElements = readmeContent.querySelectorAll("th");
           const tdElements = readmeContent.querySelectorAll("td");
 
@@ -176,14 +167,12 @@
         }
       }
 
-      // 在 DOM 加载完成后立即应用样式
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", applyMarkdownStyles);
       } else {
         applyMarkdownStyles();
       }
     </script>
-    <!-- 配置 Tailwind -->
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -232,15 +221,15 @@
           background: linear-gradient(135deg, #035df8);/*头像框下按钮颜色 #6d03f8,, #ff3cff, #ff6f2c*/
         }
         .card-hover {
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .card-hover:hover {
-          transform: translateY(-5px);
+          transform: translateY(-4px);
           box-shadow:
-            0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 20px 25px -5px rgba(0, 0, 0, 0.08),
             0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        /* 云母效果和边框光效 */
+        /* 云母模糊效果底色 */
         .glass-panel {
           background: rgba(255, 255, 255, 0.6);
           backdrop-filter: blur(25px);
@@ -278,34 +267,28 @@
           background: linear-gradient(90deg, transparent, #ffffff1f, transparent);
         }
         .dark .glass-panel {
-          background: rgba(17, 24, 39, 0.749);
+          background: rgba(0, 0, 0, 0.5);
           border: 1px solid rgba(179, 179, 179, 0.1);
           box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         @keyframes border-glow {
           0%,
-          100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 1;
-          }
+          100% { opacity: 0.3; }
+          50% { opacity: 1; }
         }
       }
     </style>
     <style>
       body {
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
+        transition: background-color 0.4s ease, color 0.4s ease;
       }
-
-      /* 背景样式 */
+      /* 浅色无背景图时使用温和纯白，深色无图时使用极致纯黑 */
       body {
-        background-color: #121212;
+        background-color: #ffffff;
       }
-
-      /* 在没有背景图片时使用默认背景色 */
+      body.dark {
+        background-color: #000000;
+      }
 
       /* 背景图片容器 */
       .bg-container {
@@ -318,47 +301,46 @@
         overflow: hidden;
       }
 
-      /* 背景图片 */
       .bg-image {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url("img/background/background2606.jpg");
+        background-image: url("img/bg/background_light.jpg");
         background-size: cover;
         background-position: center;
         filter: blur(2px);
+        transform: scale(1.05);
         transform: scale(1.1); /* 略微放大以避免边缘出现空白 */
       }
 
-      /* 背景遮罩 */
+      .dark .bg-image {
+        background-image: url("img/bg/background_dark.jpg");
+      }
+
       .bg-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #ffffff30;
-        opacity: 0.8;
+        background-color: #ffffffd6;
+        opacity: 0.15;
+        transition: opacity 0.5s ease, background-color 0.5s ease;
       }
 
-      /* 深色模式下的背景遮罩 */
       .dark .bg-overlay {
-        background-color: #00000071;
+        background-color: #000000d6;
+        opacity: 0.65; /* 配合纯黑背景，使背景图在黑夜下极其具有优雅沉浸感 */
       }
 
-      /* 动画样式 */
       .avatar-glow {
         animation: glow 3s ease-in-out infinite alternate;
       }
       @keyframes glow {
-        from {
-          box-shadow: 0 0 5px rgba(255, 255, 255, 0.139);
-        }
-        to {
-          box-shadow: 0 0 20px #ffffff36;
-        }
+        from { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+        to { box-shadow: 0 0 15px rgba(255, 255, 255, 0.25); }
       }
       .animate-fade-in {
         animation: fadeIn 0.8s ease-in;
@@ -383,168 +365,190 @@
         }
         to {
           opacity: 1;
-          transform: translateX(0);
-        }
+          transform: translateX(0);}
       }
       .repo-item {
         transition: all 0.3s ease;
       }
       .repo-item:hover {
-        transform: translateX(5px);
+        transform: translateX(4px);
       }
       .tech-icon {
         filter: drop-shadow(0 0 5px #60a5fa);
       }
+
+      /* 选项菜单：基础微动效 (支持横向拉长过渡) */
+      #options-menu {
+        transform: scale(0.96) translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #options-menu.show {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
     </style>
   </head>
   <body class="text-gray-800 dark:text-gray-200 min-h-screen">
-    <!-- 背景容器 -->
     <div class="bg-container">
-      <div class="bg-image"></div>
-      <div class="bg-overlay"></div>
+      <div id="main-bg-image" class="bg-image"></div>
+      <div id="main-bg-overlay" class="bg-overlay"></div>
     </div>
 
-    <!-- 顶部导航栏 -->
     <nav
       class="fixed w-full top-0 z-50 bg-white/40 dark:bg-black/40 backdrop-blur-md shadow-sm"
     >
       <div
         class="container mx-auto px-4 py-3 flex justify-between items-center"
       >
-        <!-- 顶栏左上角显示头像和用户名 -->
         <div class="flex items-center space-x-3">
           <img
             src="img/profile/profile_xingyue_fox.jpg"
             alt="星月Fox"
             class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-700 shadow-sm"
           />
-          <!--原src="https://avatars.githubusercontent.com/u/166911432?v=4"-->
-
-          <span class="font-bold text-lg">星月Fox的主页</span>
+          <span class="font-bold text-lg tracking-wide" data-i18n="nav_title">星月Fox的主页</span>
         </div>
-        <div class="flex items-center space-x-4">
-          <!-- 极简模式开关 -->
+        
+        <div class="relative">
           <button
-            id="minimal-mode-toggle"
-            class="p-2 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-200/40 transition-colors relative"
+            id="menu-btn"
+            class="flex items-center space-x-1.5 p-2 px-3 rounded-xl bg-gray-200/40 dark:bg-gray-800/40 hover:bg-gray-200/70 dark:hover:bg-gray-700/50 transition-colors text-gray-800 dark:text-gray-200 shadow-sm border border-white/20"
           >
-            <span class="sr-only">切换极简模式</span>
-            <i class="fa-solid fa-columns text-gray-800 dark:text-gray-200"> 沉浸</i>
+            <i class="fa-solid fa-sliders text-xs opacity-80"></i>
+            <span class="text-sm font-semibold" data-i18n="menu_options">选项</span>
+            <i class="fa-solid fa-chevron-down text-[10px] opacity-50 transition-transform duration-200" id="menu-arrow"></i>
           </button>
 
-          <!-- 深色模式切换 -->
-          <button
-            id="theme-toggle"
-            class="p-2 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-200/40 transition-colors relative"
+          <div
+            id="options-menu"
+            class="absolute right-0 mt-2 w-52 rounded-2xl shadow-2xl p-1.5 bg-white/45 dark:bg-black/45 backdrop-blur-2xl border border-white/30 dark:border-white/10 z-50 text-sm flex overflow-hidden"
           >
-            <i class="fa-solid fa-moon text-gray-800 dark:text-gray-200"> 深色</i>
-          
-          </button>
-          <!--<a
-            href="https://github.com/xingyuefox"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          >
-            <i class="fa-brands fa-github text-xl"></i>
-          </a>-->
+            <div class="w-[11.5rem] shrink-0 flex flex-col space-y-0.5">
+              <button
+                id="minimal-mode-toggle"
+                class="w-full flex items-center justify-between p-2 px-2.5 rounded-xl hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors text-left"
+              >
+                <span class="flex items-center space-x-2">
+                  <i class="fa-solid fa-columns w-4 text-center opacity-70"></i>
+                  <span data-i18n="menu_immersive">沉浸模式</span>
+                </span>
+                <span id="immersive-status" class="text-[11px] bg-gray-300/50 dark:bg-gray-700/50 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400" data-i18n="status_off">关闭</span>
+              </button>
+
+              <button
+                id="bg-visibility-toggle"
+                class="w-full flex items-center justify-between p-2 px-2.5 rounded-xl hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors text-left"
+              >
+                <span class="flex items-center space-x-2">
+                  <i class="fa-solid fa-image w-4 text-center opacity-70"></i>
+                  <span data-i18n="menu_bg">显示背景</span>
+                </span>
+                <span id="bg-status" class="text-[11px] bg-green-500/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded" data-i18n="status_on">开启</span>
+              </button>
+
+              <button
+                id="theme-toggle"
+                class="w-full flex items-center justify-between p-2 px-2.5 rounded-xl hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors text-left"
+              >
+                <span class="flex items-center space-x-2">
+                  <i class="fa-solid fa-moon w-4 text-center opacity-70"></i>
+                  <span data-i18n="menu_darkmode">深色模式</span>
+                </span>
+                <span id="dark-status" class="text-[11px] bg-gray-300/50 dark:bg-gray-700/50 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400">Auto</span>
+              </button>
+
+              <div class="h-[1px] bg-gray-300/30 dark:bg-gray-700/40 my-1"></div>
+
+              <button
+                id="lang-expand-btn"
+                class="w-full flex items-center justify-between p-2 px-2.5 rounded-xl hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors text-left"
+              >
+                <span class="flex items-center space-x-2">
+                  <i class="fa-solid fa-language w-4 text-center opacity-70"></i>
+                  <span data-i18n="menu_lang">切换语言</span>
+                </span>
+                <div class="flex items-center space-x-1 text-xs text-primary dark:text-primary-dark font-medium">
+                  <span id="menu-lang-indicator">中文</span>
+                  <i class="fa-solid fa-chevron-right text-[9px] opacity-60 transition-transform duration-300" id="lang-arrow"></i>
+                </div>
+              </button>
+            </div>
+
+            <div id="lang-sub-panel" class="w-32 border-l border-gray-300/20 dark:border-gray-700/30 ml-2 pl-2 flex flex-col space-y-0.5 opacity-0 pointer-events-none transition-opacity duration-200">
+              <button data-lang-set="zh" class="w-full text-left p-1.5 px-2 rounded-lg hover:bg-primary/10 hover:text-primary dark:hover:text-primary-dark transition-colors text-xs font-medium">简体中文</button>
+              <button data-lang-set="en" class="w-full text-left p-1.5 px-2 rounded-lg hover:bg-primary/10 hover:text-primary dark:hover:text-primary-dark transition-colors text-xs font-medium">English</button>
+              <button data-lang-set="ja" class="w-full text-left p-1.5 px-2 rounded-lg hover:bg-primary/10 hover:text-primary dark:hover:text-primary-dark transition-colors text-xs font-medium">日本語</button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
 
-    <!-- 主要内容 -->
     <main class="container mx-auto px-4 pt-24 pb-16">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- 左侧个人信息 -->
         <div class="lg:col-span-1 animate-fade-in">
           <div
             class="glass-panel bg-white/30 dark:bg-black/40 rounded-2xl shadow-xl p-6 card-hover"
           >
-            <!-- 头像 -->
             <div class="flex justify-center mb-6">
               <img
                 src="img/profile/profile_xingyue_fox.jpg"
                 alt="星月Fox"
                 class="w-36 h-36 rounded-full border-4 border-white dark:border-gray-700 shadow-lg avatar-glow"
               />
-              <!--原src="https://avatars.githubusercontent.com/u/166911432?v=4"-->
-
-            </div>
-            <!-- 基本信息 -->
+              </div>
             <div class="text-center mb-6">
-              <h1 class="text-2xl font-bold mb-2">星月Fox</h1>
-              <p class="text-gray-600 dark:text-gray-400 mb-4">
+              <h1 class="text-2xl font-bold mb-2" data-i18n="profile_name">星月Fox</h1>
+              <p class="text-gray-600 dark:text-gray-400 mb-4 text-base" data-i18n="profile_bio">
                 密码下周就能想起来
-              </p><!-- github页为https://github.com/xingyuefox -->
+              </p>
               <a
-                href="https://space.bilibili.com/3493117999188634"
+                href="https://github.com/xingyuefox"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-blue-200 font-medium hover:opacity-90 transition-opacity"
               >
-                <i class="fa-brands fa-bilibili mr-2"></i>
-                访问我的 Bilibili
+                <i class="fa-brands fa-github mr-2"></i>
+                <span data-i18n="btn_github">访问我的 Github</span>
               </a>
             </div>
-            <!-- 统计信息，原浅色面板gray100 dark面板gray700 -->
             <div class="grid grid-cols-2 gap-4">
-              <div
-                class="bg-gray-100/70 dark:bg-black/40 rounded-xl p-4 text-center"
-              >
-                <div
-                  class="text-2xl font-bold text-primary dark:text-primary-dark mb-1"
-                >
-                  <a href="https://music.163.com/" target="_blank">NetEasy</a>
+              <div class="bg-gray-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
+                  <a href="https://limestart.cn/" target="_blank" class="hover:underline">limestart</a>
                 </div>
-                <div class="text-sm text-gray-700 dark:text-gray-300">
-                  来听会音乐?
+                <div class="text-sm text-gray-600 dark:text-gray-400" data-i18n="card_1">
+                  青柠起始页
                 </div>
               </div>
-              <div
-                class="bg-gray-100/70 dark:bg-black/40 rounded-xl p-4 text-center"
-              >
-                <div
-                  class="text-2xl font-bold text-primary dark:text-primary-dark mb-1"
-                >
-                  <a href="mailto:xingyue_fox@outlook.com" target="_blank">Email</a>
+              <div class="bg-gray-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
+                  <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline">Email</a>
                 </div>
-                <div class="text-sm text-gray-700 dark:text-gray-300">
+                <div class="text-sm text-gray-600 dark:text-gray-400" data-i18n="card_2">
                   联系我
                 </div>
               </div>
             </div>
-            <!-- 技术标签 -->
             <div class="mt-6">
               <h3 class="text-lg font-semibold mb-3">技术栈</h3>
               <div class="flex flex-wrap gap-2">
-                <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-blue-800 dark:text-blue-300"
-                  style="background-color: #0e2e6419"#80808030
-                >
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>
-                  HTML/CSS
+                <span class="px-3 py-1 rounded-full text-sm flex items-center text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>HTML/CSS
                 </span>
-
-                <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-violet-700 dark:text-violet-200"
-                  style="background-color: #6a11cb19"#80808030
-                >
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>
-                  Python
+                <span class="px-3 py-1 rounded-full text-sm flex items-center text-violet-700 dark:text-violet-300 bg-violet-500/10 border border-violet-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>Python
                 </span>
-
-                <span
-                  class="px-3 py-1 rounded-full text-sm flex items-center text-blue-500 dark:text-blue-200"
-                  style="background-color: #2e6dff19"#80808030
-                >
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>
-                  JavaScript
+                <span class="px-3 py-1 rounded-full text-sm flex items-center text-sky-600 dark:text-sky-300 bg-sky-500/10 border border-sky-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>JavaScript
                 </span>
               </div>
             </div>
           </div>
 
-          <!-- 活动图表 -->
           <div
             class="glass-panel bg-white/30 dark:bg-black/40 rounded-2xl shadow-xl p-6 mt-6 card-hover animate-fade-in"
             style="animation-delay: 0.2s"
@@ -556,429 +560,430 @@
           </div>
         </div>
 
-        <!-- 右侧内容区域 -->
-        <div class="lg:col-span-2">
-          <!-- README 内容 -->
-          <div
-            class="glass-panel bg-white/30 dark:bg-black/40 rounded-2xl shadow-xl p-6 readme-content"
-          >
-            <h2 class="text-2xl font-bold mb-4 flex items-center">
-            星月Fox是谁？
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          <div class="glass-panel rounded-2xl p-6 animate-fade-in" id="intro-panel" style="animation-delay: 0.1s">
+            <h2 class="text-2xl font-bold mb-4 flex items-center" data-i18n="about_title">
+              星月Fox是谁？
             </h2>
-            <ul>
-              海内存知己，天涯若比邻。
-              你好👋很高兴能在这里见到，我是星月Fox。17岁高中生，对有趣的世界和有趣的你感到好奇
-            </ul>
-            <ul>
-              技术极客，精通Windows系统运维。
-            </ul>
-            <ul>
-              
-            </ul>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-base" data-i18n="about_p1">
+              海内存知己，天涯若比邻。你好👋很高兴能在这里见到，我是星月Fox。17岁高中生，对有趣的世界和有趣的你感到好奇
+            </p>
+            <p class="mt-2 text-gray-700 dark:text-gray-300 leading-relaxed text-base" data-i18n="about_p2">
+              技术极客，对于UI设计/前端感兴趣。擅长Windows系统运维。
+            </p>
           </div>
 
-          <div
-            class="glass-panel bg-white/30 dark:bg-black/40 rounded-2xl shadow-xl p-6 mt-6 readme-content"
-          >
-            <h2 class="text-2xl font-bold mb-4 flex items-center"></h2>
-            <div class="max-w-none" id="readme-content">
-              <h3 id="recently">🥰很高兴认识你</h3>
-              <ul>交换友链？</ul>
-              <ul>向我的Email<a href="mailto:xingyue_fox@outlook.com" target="_blank">发送邮件✉️</a>，最好直接写明链接，或者留下其他联系方式</ul>
-              <h3 id="recently">🎮游戏台</h3>
-              <ul>
-              游戏方面，我是一位13年资历的Minecraft玩家，同时现在也热衷《鸣潮》
-            </ul>
-            <ul></ul>
-            <ul>如果你喜欢赛车，那你一定不要忘了地平线！😆</ul>
-              <ul>
-                <h3 class="text-lg font-semibold mb-3"></h3>
-                <!--超链接-->
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="px-10 py-3 bg-gray-50/60 dark:bg-black/40 rounded-lg p-4 text-center"
-                  >
-                    <a href="https://Minecraft.net" target="_blank"
-                      >Minecraft</a
-                    >
-                  </span>
+          <div class="glass-panel rounded-2xl p-6 animate-fade-in" id="readme-panel" style="animation-delay: 0.3s">
+            <div class="max-w-none text-base leading-relaxed" id="readme-content">
+              <h3 class="text-2xl font-bold mt-2 mb-3 text-gray-900 dark:text-white" id="recently" data-i18n="greet_title">🥰很高兴认识你</h3>
+              <p class="mb-2 text-gray-700 dark:text-gray-300" data-i18n="greet_link">交换友链？</p>
+              <p class="mb-4 text-gray-700 dark:text-gray-300">
+                <span data-i18n="greet_mail">向我的Email</span>
+                <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline font-semibold">发送邮件✉️</a>，
+                <span data-i18n="greet_detail">最好直接写明链接，或者留下其他联系方式</span>
+              </p>
+              
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-gray-900 dark:text-white" data-i18n="proj_title">📖我的项目</h3>
+              <p class="text-gray-700 dark:text-gray-300" data-i18n="proj_1">HomePage部署:基于Flask的个人主页</p>
+              <p class="text-gray-700 dark:text-gray-300 mt-1">
+                <span data-i18n="proj_2">目前正在使用</span>
+                <a href="https://m3.material.io/" target="_blank" class="hover:underline">Material3 Expressive设计规范</a>
+                <span data-i18n="proj_2_1">改进此页面</span>
+              </p>
+              <div class="my-3 border-t border-gray-200/30 dark:border-gray-700/30"></div>
+              <p class="text-sm text-gray-500 italic" data-i18n="proj_explore">发现有趣的项目</p>
 
-                  <span
-                    class="px-14 py-3 bg-gray-50/60 dark:bg-black/40 rounded-lg p-4 text-center"
-                  >
-                    <a href="https://mc.kurogames.com" target="_blank">鸣潮</a>
-                  </span>
-
-                  <span
-                    class="px-4 py-3 bg-gray-50/60 dark:bg-black/40 rounded-lg p-4 text-center"
-                  >
-                    <a href="https://forza.net/" target="_blank">极限竞速：地平线</a>
-                  </span>
-
-                  <span
-                    class="px-11 py-3 bg-gray-50/60 dark:bg-black/40 rounded-lg p-4 text-center"
-                  >
-                    <a href="https://bluearchive.jp" target="_blank"
-                      >蔚蓝档案</a
-                    >
-                  </span>
-
+            
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-gray-900 dark:text-white" data-i18n="game_title">🎮游戏台</h3>
+              <p class="mb-2 text-gray-700 dark:text-gray-300" data-i18n="game_p1">
+                游戏方面，非常推荐去试试下面这些！
+              </p>
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-4">
+                <div class="bg-gray-100/40 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-xl p-3 text-center card-hover flex items-center justify-center">
+                  <a href="https://Minecraft.net" target="_blank" class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-primary font-semibold text-sm">
+                    <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden align-middle"><img src="img/icon/minecraft_logo.jpg" alt="img/icon/minecraft_logo.jpg" class="w-full h-full object-cover block"></span>
+                    <span>Minecraft</span>
+                  </a>
                 </div>
-              </ul>
+                <div class="bg-gray-100/40 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-xl p-3 text-center card-hover flex items-center justify-center">
+                  <a href="https://mc.kurogames.com" target="_blank" class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-primary font-semibold text-sm">
+                    <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden align-middle"><img src="img/icon/wuthering_waves_logo.jpg" alt="img/icon/minecraft_logo.jpg" class="w-full h-full object-cover block"></span>
+                    <span data-i18n="game_mc">鸣潮</span>
+                  </a>
+                </div>
+                <div class="bg-gray-100/40 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-xl p-3 text-center card-hover flex items-center justify-center">
+                  <a href="https://forza.net/" target="_blank" class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-primary font-semibold text-sm">
+                    <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden align-middle"><img src="img/icon/forza_horizon_6_logo.jpg" alt="img/icon/minecraft_logo.jpg" class="w-full h-full object-cover block"></span>
+                    <span data-i18n="game_fh">地平线</span>
+                  </a>
+                </div>
+                <div class="bg-gray-100/40 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-xl p-3 text-center card-hover flex items-center justify-center">
+                  <a href="https://bluearchive.jp" target="_blank" class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-primary font-semibold text-sm">
+                    <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden align-middle"><img src="img/icon/blue_archive_icon.jpg" alt="img/icon/minecraft_logo.jpg" class="w-full h-full object-cover block"></span>
+                    <span data-i18n="game_ba">蔚蓝档案</span>
+                  </a>
+                </div>
+              </div>
              
-              <h3 id="project">📖我的项目</h3>
-              <ul>
-                <li>HomePage部署:基于Flask的个人主页</li>
-                <li>
-                  目前计划使用<a
-                    href="https://m3.material.io/"
-                    target="_blank"
-                    >Material3 Expressive设计规范</a
-                  >重塑此页面
-                </li>
-                <p>/</p>
-                <p>发现有趣的项目</p>
-              </ul>   
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-gray-900 dark:text-white" data-i18n="tool_title">🛠️工具(Beta)</h3>
+              <p class="text-gray-700 dark:text-gray-300" data-i18n="tool_p">Getting ready</p>
 
-              <h3 id="tool">🛠️工具(Beta)</h3>
-              <ul>希望这些能帮到你😎</ul>
-              <ul><span
-                    class="px-14 py-1 text-sm flex items-center text-white dark:text-white"
-                    style="background-color: #00000020"
-                  >
-                    <a href="https://time.is" target="_blank"></a>
-                  </span>
-                </ul>
-
-              <ul></ul>
-
-              <h3 id="find-me">🌐在互联网上的存在之地</h3>
-              <ul>
-                <li>
-                  <a
-                    href="https://space.bilibili.com/3493117999188634"target="_blank">Bilibili</a
-                  >
-                </li>
-                <li>
-                  <a href="https://github.com/XingYueFox" target="_blank">Github</a>
-                </li>
-                <li>
-                  <a href="https://namemc.com/XingYue_Fox" target="_blank">NameMC</a>
-                </li>
-                <li>
-                  <a href="https://t.me/xingyuefox" target="_blank">Telegram</a>
-                </li>
-                <li>
-                  <a href="mailto:xingyue_fox@outlook.com" target="_blank"
-                    >联系我的邮箱></a
-                  >
-                </li>
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-gray-900 dark:text-white" data-i18n="social_title">🌐在互联网上的存在之地</h3>
+              <ul class="list-disc list-inside space-y-2 font-semibold">
+                <li><a href="https://space.bilibili.com/3493117999188634" target="_blank" class="hover:underline">Bilibili</a></li>
+                <li><a href="https://github.com/XingYueFox" target="_blank" class="hover:underline">Github</a></li>
+                <li><a href="https://namemc.com/XingYue_Fox" target="_blank" class="hover:underline">NameMC</a></li>
+                <li><a href="https://t.me/xingyuefox" target="_blank" class="hover:underline">Telegram</a></li>
+                <li><a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline" data-i18n="social_mail">联系我的邮箱></a></li>
               </ul>
 
-
-               <h3 id="recently">🚧维护概览</h3>
-              <ul>最后维护于2026/06/08</ul>
-              <ul>[6月更新]此次为2026年第2号季度累积更新</ul>
-
+              <h3 class="text-2xl font-bold mt-8 mb-2 text-gray-900 dark:text-white" data-i18n="dev_title">🚧维护概览</h3>
+              <p class="text-gray-600 dark:text-gray-400"><span data-i18n="dev_last">最后维护于 </span>2026/06/14</p>
+              <p class="text-gray-600 dark:text-gray-400 mt-0.5" data-i18n="dev_version">[6月更新]此次为2026年第2号季度累积更新</p>
             </div>
           </div>
 
-          <!-- 友链预留位 -->
-          <div
-            class="glass-panel bg-white/30 dark:bg-black/40 rounded-2xl shadow-xl p-6 mt-6 card-hover animate-fade-in"
-            style="animation-delay: 0.4s"
-          >            <h2 class="text-2xl font-bold mb-4 flex items-center">
-              <i
-                class="fa-solid fa-code text-primary dark:text-primary-dark mr-2"
-              ></i>
-              动态
+          <div class="glass-panel rounded-2xl p-6 animate-fade-in" id="news-panel" style="animation-delay: 0.5s">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+              <i class="fa-solid fa-code text-primary dark:text-primary-dark mr-2"></i>
+              <span data-i18n="news_title">动态</span>
             </h2>
             <div class="space-y-4">
-
-              
               <a
                 href="https://drive.google.com/drive/folders/15v32ha1JSSh7SUVVIhJyqWlZYyvI0mOw"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="block p-4 bg-gray-50/60 dark:bg-black/40 rounded-xl repo-item hover:bg-gray-100 dark:hover:bg-gray-300/10"
+                class="block p-4 bg-gray-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-gray-100 dark:hover:bg-black/10"
               >
                 <div class="flex justify-between items-start mb-2">
-                  <h3
-                    class="text-lg font-semibold text-primary dark:text-primary-dark"
-                  >
-                    在Minecraft中的照片
-                  </h3>
-                  <span
-                    class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
-                  >
-                    <i class="fa-solid fa-columns mr-1"></i>
-                    3分钟内
+                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark" data-i18n="news1_h">在Minecraft中的照片</h3>
+                  <span class="text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>3min</span>
                   </span>
                 </div>
-                <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
-                  网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面
-                </p>
-                <div
-                  class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400"
-                >
-                  <span>Google Drive</span>
-                  <span class="update-date" data-date="2026-02-24T19:21:04Z"
-                    >更新于 2026-06-08</span
-                  >
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-2" data-i18n="news1_p">网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面</p>
+                <div class="flex justify-between items-center text-xs text-gray-400">
+                  <span>Google Drive</span><span>2026-06-14</span>
                 </div>
               </a>
-
 
               <a
                 href="https://drive.google.com/drive/folders/1GwBykGeMJ3pF_mcbdA9TX9RgzC_3dyzQ"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="block p-4 bg-gray-50/60 dark:bg-black/40 rounded-xl repo-item hover:bg-gray-100 dark:hover:bg-gray-300/10"
+                class="block p-4 bg-gray-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-gray-100 dark:hover:bg-black/10"
               >
                 <div class="flex justify-between items-start mb-2">
-                  <h3
-                    class="text-lg font-semibold text-primary dark:text-primary-dark"
-                  >
-                    鸣潮4K壁纸（含动态）
-                  </h3>
-                  <span
-                    class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
-                  >
-                    <i class="fa-solid fa-columns mr-1"></i>
-                    10分钟内
+                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark" data-i18n="news2_h">鸣潮4K壁纸（含动态）</h3>
+                  <span class="text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>15min</span>
                   </span>
                 </div>
-                <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
-                  由X用户@KiriyumeBun提供文件，包含剧情CG图，版本活动图及版本动态视频封面
-                </p>
-                <div
-                  class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400"
-                >
-                  <span>Google Drive</span>
-                  <span class="update-date" data-date="2026-02-11T00:50:26Z"
-                    >更新于 2026-06-08</span
-                  >
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-2" data-i18n="news2_p">由X用户@KiriyumeBun提供文件，包含剧情CG图，版本活动图及版本动态视频封面</p>
+                <div class="flex justify-between items-center text-xs text-gray-400">
+                  <span>Google Drive</span><span>2026-06-14</span>
                 </div>
               </a>
-
               
-              <a
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block p-4 bg-gray-50/60 dark:bg-black/40 rounded-xl repo-item hover:bg-gray-100 dark:hover:bg-gray-300/10"
-              >
-                <div class="flex justify-between items-start mb-2">
-                  <h3
-                    class="text-lg font-semibold text-primary dark:text-primary-dark"
-                  >
-                    无法访问？
-                  </h3>
-                  <span
-                    class="text-sm text-gray-500 dark:text-gray-400 flex items-center"
-                  >
-                    <i class="fa-solid fa-star mr-1"></i>
-                    Null
-                  </span>
+              <div class="block p-4 bg-gray-50/50 dark:bg-black/30 border border-dashed border-gray-300 dark:border-gray-700 rounded-xl">
+                <div class="flex justify-between items-start mb-1">
+                  <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">无法访问？</h3>
+                  <span class="text-xs text-gray-400 flex items-center"><i class="fa-solid fa-star mr-1"></i>Null</span>
                 </div>
-                <p class="text-gray-800 dark:text-gray-200 text-sm mb-2">
-                  请注意：以上页面由Google托管，但由于中国法律限制和长城防火墙，使用中国大陆流量无法访问谷歌服务器
-                </p>
-                <div
-                  class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400"
-                >港澳台不受限
-                  <span></span>
-                  <span class="update-date" data-date="2024-07-26T07:32:56Z"
-                    >---</span
-                  >
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">请注意：以上页面由Google托管，但由于中国法律限制和长城防火墙，使用中国大陆流量无法访问谷歌服务器</p>
+                <div class="flex justify-between items-center text-xs text-gray-400">
+                  <span>港澳台不受限</span><span>---</span>
                 </div>
-              </a>
-
-
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- 页脚 -->
-    <footer
-      class="glass-panel bg-white/30 dark:bg-black/30 shadow-inner py-5"
-    >
-      <div
-        class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400"
-      >
+    <footer class="glass-panel bg-white/20 dark:bg-black/20 shadow-inner py-6 mt-10">
+      <div class="container mx-auto px-4 text-center text-sm text-gray-500">
         <p>© 2026 星月Fox.</p>
-        <!--备份<p>© 2026 星月Fox. 由 Flask + Tailwind CSS 驱动。</p>-->
-        <div class="mt-3 space-x-4">
-          <!-- 联系方式图标，仅在配置了有效URL时显示 -->
-          <!--已被跳过
-          <a
-            href="https://qm.qq.com/q/TCpx54yrqS"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
-          >
-            <i class="fa-brands fa-qq"></i>
-          </a>
-
-          <a
-            href="https://space.bilibili.com/3493117999188634"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
-          >
-            <i class="fa-brands fa-bilibili"></i>
-          </a>
-
-          <a
-            href="https://www.douyin.com/user/MS4wLjABAAAA_kFj9khdp7uUu2BAewl-xLeDNsulxpkkaQOSG3MMmXzAEWIug4FM9Dc_WzFqUar3?from_tab_name=main"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
-          >
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
-          -->
-        </div>
       </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-      // 深色模式切换
-      document.addEventListener("DOMContentLoaded", function () {
-        const themeToggle = document.getElementById("theme-toggle");
-        const htmlElement = document.documentElement;
-
-        // 检查本地存储或系统偏好
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-
-        // 根据配置设置初始主题
-        const configDarkMode = "auto";
-        if (savedTheme) {
-          htmlElement.classList.toggle("dark", savedTheme === "dark");
-        } else if (configDarkMode === "auto") {
-          htmlElement.classList.toggle("dark", prefersDark);
-        } else if (configDarkMode === "dark") {
-          htmlElement.classList.add("dark");
+      // 1. 四国语言核心词典
+      const i18nDictionary = {
+        'zh': {
+          html_title: "星月Fox的主页", nav_title: "星月Fox的主页", menu_options: "选项",
+          menu_immersive: "沉浸模式", menu_bg: "显示背景", menu_darkmode: "深色模式", menu_lang: "切换语言",
+          status_on: "开启", status_off: "关闭", profile_name: "星月Fox", profile_bio: "密码下周就能想起来",
+          btn_github: "访问我的 Github", card_1: "青柠起始页", card_2: "联系我",
+          title_tech: "技术栈", title_chart: "星月Fox的概览", about_title: "星月Fox是谁？",
+          about_p1: "海内存知己，天涯若比邻。你好👋很高兴能在这里见到，我是星月Fox。17岁高中生，对有趣的世界和有趣的你感到好奇",
+          about_p2: "技术极客，对于UI设计/前端感兴趣。擅长Windows系统运维。",
+          greet_title: "🥰很高兴认识你", greet_link: "交换友链？", greet_mail: "向我的Email", greet_detail: "最好直接写明链接，或者留下其他联系方式",
+          game_title: "🎮游戏台", game_p1: "游戏方面，非常推荐去试试下面这些！😆",
+          game_mc: "鸣潮", game_fh: "地平线", game_ba: "蔚蓝档案", proj_title: "📖我的项目",
+          proj_1: "HomePage部署:基于Flask的个人主页", proj_2: "目前正在使用", proj_2_1: "改进此页面", proj_explore: "发现有趣的项目",
+          tool_title: "🛠️工具(Beta)", tool_p: "未开发", social_title: "🌐在互联网上的存在之地", social_mail: "联系我的邮箱>",
+          dev_title: "🚧维护概览", dev_last: "最后维护于 ", dev_version: "[6月更新]此次为2026年第2号季度累积更新",
+          news_title: "动态", news1_h: "在Minecraft中的照片", news1_p: "网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面",
+          news2_h: "鸣潮4K壁纸（含动态）", news2_p: "由X用户@KiriyumeBun提供文件，包含剧情CG图，版本活动图及版本动态视频封面",
+          chart_labels: ["网站运维", "编程语言", "学业", "交友", "世界观测", "搞事情", "探究", "强迫症", "魔法"], chart_dataset: "能力水平"
+        },
+        'en': {
+          html_title: "XingYue_Fox's Hub", nav_title: "XingYue_Fox's Hub", menu_options: "Options",
+          menu_immersive: "Immersive", menu_bg: "Background", menu_darkmode: "Dark Mode", menu_lang: "Language",
+          status_on: "ON", status_off: "OFF", profile_name: "XingYue_Fox", profile_bio: "We get to decide how we should live.",
+          btn_github: "Visit My GitHub", card_1: "Start Page", card_2: "Contact Me",
+          title_tech: "Tech Stack", title_chart: "Overview", about_title: "Who is XingYue_Fox?",
+          about_p1: "A bosom friend afar brings a distant land near. Hello👋 Nice to meet you, I'm XingYue_Fox. A 17-year-old high schooler curious about this interesting world.",
+          about_p2: "Tech geek, passionate about UI design and Frontend. Proficient in Windows SysOps.",
+          greet_title: "🥰 Nice to meet you", greet_link: "Exchange links?", greet_mail: "Send mail to my ", greet_detail: "address. Better specify your URL or leave contact info.",
+          game_title: "🎮 Gaming Rig", game_p1: "When it comes to games, I highly recommend trying out these!😆", game_ba: "Blue Archive", proj_title: "📖 Projects",
+          proj_1: "HomePage Deployment: Personal Hub based on Flask", proj_2: "Currently using ", proj_2_1: " to improve this page", proj_explore: "Discover interesting projects",
+          tool_title: "🛠️ Tools (Beta)", tool_p: "Getting ready", social_title: "🌐 Find me on Web", social_mail: "Contact via Email >",
+          dev_title: "🚧 Status", dev_last: "Last maintained on ", dev_version: "[June Update] Q2 cumulative update of 2026.",
+          news_title: "Moments", news1_h: "Photos in Minecraft", news1_p: "In-page images polish in progress. Currently hosted on Google Drive.",
+          news2_h: "Wuthering Waves 4K Wallpapers", news2_p: "Files shared by X user @KiriyumeBun, containing CGs and live wallpapers.",
+          chart_labels: ["SysOps", "Coding", "Academics", "Social", "Observation", "Chaos", "Research", "OCD", "Magic"], chart_dataset: "Skill level"
+        },
+        'ja': {
+          html_title: "星月Foxのホームページ", nav_title: "星月Foxのページ", menu_options: "オプション",
+          menu_immersive: "集中モード", menu_bg: "背景表示", menu_darkmode: "ダークモード", menu_lang: "言語切替",
+          status_on: "オン", status_off: "オフ", profile_name: "星月Fox", profile_bio: "We get to decide how we should live.",
+          btn_github: "GitHubを見る", card_1: "スタートページ", card_2: "連絡をとる",
+          title_tech: "スキル", title_chart: "プロフィール概要", about_title: "星月Foxは誰？",
+          about_p1: "こんにちは👋 ここでお会いできて嬉しいです、星月Foxです。17歳の高校生で、面白い世界とあなたに興味を持っています。",
+          about_p2: "テックオタクで、UIデザインとフロントエンドに興味があります。Windowsのシステム運用管理が得意です。",
+          greet_title: "🥰 はじめまして", greet_link: "リンク交換？", greet_mail: "私のEmailへ", greet_detail: "メールを送ってください。URLや連絡先を直接明記していただけると助かります。",
+          game_title: "🎮 ゲーム", game_p1: "ゲームに関しては、ぜひ以下のものを試してみてほしい！😆",
+          game_mc: "鳴潮", game_fh: "ホライゾン", game_ba: "ブルアカ", proj_title: "📖 プロジェクト",
+          proj_1: "HomePage構築: Flaskベースの個人サイト", proj_2: "現在、", proj_2_1: " を使ってこのページを改善中です", proj_explore: "面白いプロジェクトを発見する",
+          tool_title: "🛠️ ツール (Beta)", tool_p: "", social_title: "🌐 ネットで見つけてね", social_mail: "メールで問い合わせる >",
+          dev_title: "🚧 メンテナンス状況", dev_last: "最終更新日: ", dev_version: "[June Update] Q2 cumulative update of 2026.",
+          news_title: "タイムライン", news1_h: "マインクラフトでの写真", news1_p: "インライン画像の最適化中。現在はGoogleドライブのリンクです。",
+          news2_h: "鳴潮4K壁紙（動的含む）", news2_p: "Xユーザー@KiriyumeBunから提供されたファイル（CG、イベント画像、動画カバーなど）",
+          chart_labels: ["インフラ運用", "プログラミング", "学業", "コミュニティ", "世界観測", "悪だくみ", "探究心", "こだわり", "魔法"], chart_dataset: "能力値"
         }
+      };
 
-        // 主题切换事件
-        themeToggle.addEventListener("click", function () {
-          htmlElement.classList.toggle("dark");
-          localStorage.setItem(
-            "theme",
-            htmlElement.classList.contains("dark") ? "dark" : "light",
-          );
+      let currentChartInstance = null;
+
+      function applyLanguage(lang) {
+        const dict = i18nDictionary[lang];
+        if (!dict) return;
+
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            if (key === "html_title") { document.title = dict[key]; } 
+            else { el.textContent = dict[key]; }
+          }
         });
 
-        // 监听系统主题变化
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", function (e) {
-            if (configDarkMode === "auto" && !localStorage.getItem("theme")) {
-              htmlElement.classList.toggle("dark", e.matches);
-            }
-          });
+        const langShortName = { 'zh': '中文', 'en': 'EN', 'ja': '日本語' };
+        document.getElementById("menu-lang-indicator").textContent = langShortName[lang] || '中文';
 
-        /* 极简模式功能 */
-        const minimalModeToggle = document.getElementById(
-          "minimal-mode-toggle",
-        );
-        // 修改选择器，包含所有板块，修复转义字符
+        updateChartLanguage(lang);
+        localStorage.setItem("preferred-lang", lang);
+        document.documentElement.setAttribute("lang", lang);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const htmlElement = document.documentElement;
+        
+        // --- 选项控制：拉长式多语言二级菜单引擎 ---
+        const menuBtn = document.getElementById("menu-btn");
+        const optionsMenu = document.getElementById("options-menu");
+        const menuArrow = document.getElementById("menu-arrow");
+        const langExpandBtn = document.getElementById("lang-expand-btn");
+        const langSubPanel = document.getElementById("lang-sub-panel");
+        const langArrow = document.getElementById("lang-arrow");
+
+        let isLangExpanded = false;
+
+        menuBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isExpanded = optionsMenu.classList.toggle("show");
+          menuArrow.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)";
+          
+          if (!isExpanded) { resetLangPanel(); }
+        });
+
+        langExpandBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isLangExpanded = !isLangExpanded;
+          
+          if (isLangExpanded) {
+            optionsMenu.style.width = "20rem"; 
+            langArrow.style.transform = "rotate(90deg)";
+            setTimeout(() => {
+              langSubPanel.classList.remove("pointer-events-none", "opacity-0");
+            }, 150); 
+          } else {
+            resetLangPanel();
+          }
+        });
+
+        function resetLangPanel() {
+          isLangExpanded = false;
+          langSubPanel.classList.add("pointer-events-none", "opacity-0");
+          optionsMenu.style.width = "13rem"; 
+          langArrow.style.transform = "rotate(0deg)";
+        }
+
+        document.querySelectorAll("[data-lang-set]").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const targetLang = btn.getAttribute("data-lang-set");
+            applyLanguage(targetLang);
+            
+            const isMinimal = sidebarPanel.classList.contains("hidden");
+            const isBgVisible = localStorage.getItem("bg-visible") !== "false";
+            document.getElementById("immersive-status").textContent = isMinimal ? i18nDictionary[targetLang].status_on : i18nDictionary[targetLang].status_off;
+            document.getElementById("bg-status").textContent = isBgVisible ? i18nDictionary[targetLang].status_on : i18nDictionary[targetLang].status_off;
+            
+            resetLangPanel();
+            optionsMenu.classList.remove("show");
+            menuArrow.style.transform = "rotate(0deg)";
+          });
+        });
+
+        document.addEventListener("click", () => {
+          optionsMenu.classList.remove("show");
+          menuArrow.style.transform = "rotate(0deg)";
+          resetLangPanel();
+        });
+        optionsMenu.addEventListener("click", (e) => e.stopPropagation());
+
+
+        // --- 选项一：深色模式核心控制 ---
+        const themeToggle = document.getElementById("theme-toggle");
+        const darkStatus = document.getElementById("dark-status");
+        
+        function updateDarkThemeStatus() {
+          const isDark = htmlElement.classList.contains("dark");
+          darkStatus.textContent = isDark ? "Dark" : "Light";
+          darkStatus.className = isDark 
+            ? "text-[11px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded animate-pulse-slow"
+            : "text-[11px] bg-amber-500/20 text-amber-600 px-1.5 py-0.5 rounded";
+        }
+
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          htmlElement.classList.toggle("dark", savedTheme === "dark");
+        } else {
+          htmlElement.classList.toggle("dark", window.matchMedia("(prefers-color-scheme: dark)").matches);
+        }
+        updateDarkThemeStatus();
+
+        themeToggle.addEventListener("click", () => {
+          htmlElement.classList.toggle("dark");
+          localStorage.setItem("theme", htmlElement.classList.contains("dark") ? "dark" : "light");
+          updateDarkThemeStatus();
+          if (currentChartInstance) {
+            applyChartTheme(currentChartInstance, htmlElement.classList.contains("dark"));
+          }
+        });
+
+
+        // --- 选项二：沉浸模式核心控制 (完美还原最初分享的纯净淡出逻辑) ---
+        const minimalModeToggle = document.getElementById("minimal-mode-toggle");
+        const immersiveStatus = document.getElementById("immersive-status");
+        const bgImage = document.getElementById("main-bg-image");
+
+        // 完美匹配你最初给出的全屏模糊淡出方案的选择器
         const contentSections = document.querySelectorAll(
           "div.lg\\:col-span-1, div.lg\\:col-span-2 > div",
         );
-        const bgImage = document.querySelector(".bg-image");
         let isMinimalMode = false;
 
-        // 极简模式切换事件处理
         minimalModeToggle.addEventListener("click", () => {
           isMinimalMode = !isMinimalMode;
+          const currentLang = localStorage.getItem("preferred-lang") || 'zh';
 
           if (isMinimalMode) {
-            // 进入极简模式：隐藏所有板块，背景blur效果逐渐消失
+            // 进入极简：所有板块平滑渐隐并带有微幅下坠位移，禁止触控交互
             contentSections.forEach((section) => {
-              section.style.transition =
-                "opacity 0.5s ease, transform 0.5s ease";
+              section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
               section.style.opacity = "0";
               section.style.transform = "translateY(20px)";
               section.style.pointerEvents = "none";
             });
 
-            // 移除背景模糊效果
+            // 移除壁纸的高级高斯模糊 (完全变清晰)
             if (bgImage) {
               bgImage.style.transition = "filter 0.5s ease";
               bgImage.style.filter = "blur(0px)";
             }
 
-            // 给极简模式按钮添加激活样式
-            minimalModeToggle.classList.add(
-              "bg-primary/20",
-              "dark:bg-primary-dark/20",
-            );
-            minimalModeToggle
-              .querySelector("i")
-              .classList.add("text-primary", "dark:text-primary-dark");
+            immersiveStatus.textContent = i18nDictionary[currentLang].status_on;
+            immersiveStatus.className = "text-[11px] bg-green-500/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded";
           } else {
-            // 退出极简模式：显示所有板块，恢复背景blur效果
+            // 退出极简：所有板块浮现还原，恢复卡片可交互状态
             contentSections.forEach((section) => {
-              section.style.transition =
-                "opacity 0.5s ease, transform 0.5s ease";
+              section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
               section.style.opacity = "1";
               section.style.transform = "translateY(0)";
               section.style.pointerEvents = "auto";
             });
 
-            // 恢复背景模糊效果
+            // 恢复高级壁纸毛玻璃模糊状态
             if (bgImage) {
               bgImage.style.transition = "filter 0.5s ease";
               bgImage.style.filter = "blur(2px)";
             }
 
-            // 移除极简模式按钮的激活样式
-            minimalModeToggle.classList.remove(
-              "bg-primary/20",
-              "dark:bg-primary-dark/20",
-            );
-            minimalModeToggle
-              .querySelector("i")
-              .classList.remove("text-primary", "dark:text-primary-dark");
+            immersiveStatus.textContent = i18nDictionary[currentLang].status_off;
+            immersiveStatus.className = "text-[11px] bg-gray-300/50 dark:bg-gray-700/50 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400";
           }
         });
 
-        // 活动图表
+
+        // --- 选项三：关闭背景控制 (极致纯黑背板完美融合) ---
+        const bgVisibilityToggle = document.getElementById("bg-visibility-toggle");
+        const bgStatus = document.getElementById("bg-status");
+        const bgOverlay = document.getElementById("main-bg-overlay");
+        
+        let isBgVisible = localStorage.getItem("bg-visible") !== "false";
+        
+        function applyBgVisibility() {
+          const currentLang = localStorage.getItem("preferred-lang") || 'zh';
+          if (isBgVisible) {
+            bgImage.style.opacity = "1";
+            bgOverlay.style.opacity = htmlElement.classList.contains("dark") ? "0" : "0"; 
+            bgStatus.textContent = i18nDictionary[currentLang].status_on;
+            bgStatus.className = "text-[11px] bg-green-500/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded";
+          } else {
+            bgImage.style.opacity = "0";
+            bgOverlay.style.opacity = "1"; // 开启不透明遮罩，直接透出 body 的纯白或极致黑色
+            bgStatus.textContent = i18nDictionary[currentLang].status_off;
+            bgStatus.className = "text-[11px] bg-gray-300/50 dark:bg-gray-700/50 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400";
+          }
+        }
+        applyBgVisibility();
+
+        bgVisibilityToggle.addEventListener("click", () => {
+          isBgVisible = !isBgVisible;
+          localStorage.setItem("bg-visible", isBgVisible ? "true" : "false");
+          applyBgVisibility();
+        });
+
+
+        // --- Chart.js 折线图初始化 ---
         const ctx = document.getElementById("activityChart");
         if (ctx) {
           const isDark = htmlElement.classList.contains("dark");
-          const textColor = isDark ? "#9CA3AF" : "#4B5563";
+          const initLang = localStorage.getItem("preferred-lang") || 'zh';
 
-          new Chart(ctx, {
+          currentChartInstance = new Chart(ctx, {
             type: "line",
             data: {
-              labels: [
-                "网站运维",
-                "编程语言",
-                "学业",
-                "交友",
-                "世界观测",
-                "搞事情",
-                "探究",
-                "强迫症",
-                "魔法",
-              ],
+              labels: i18nDictionary[initLang].chart_labels,
               datasets: [
                 {
-                  label: "能力水平",
+                  label: i18nDictionary[initLang].chart_dataset,
                   data: [36, 30, 24, 10, 72, 50, 74, 90, 100],
-                  borderColor: isDark ? "#2575fc" : "#2575fc",
-                  backgroundColor: isDark
-                    ? "rgba(96, 165, 250, 0.4)"
-                    : "rgba(96, 165, 250, 0.4)",
+                  borderColor: "#2575fc",
+                  backgroundColor: "rgba(96, 165, 250, 0.25)",
                   tension: 0.4,
                   fill: true,
                 },
@@ -987,59 +992,35 @@
             options: {
               responsive: true,
               maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  display: false,
-                },
-                tooltip: {
-                  mode: "index",
-                  intersect: false,
-                },
-              },
+              plugins: { legend: { display: false }, tooltip: { mode: "index", intersect: false } },
               scales: {
-                y: {
-                  beginAtZero: true,
-                  grid: {
-                    color: isDark
-                      ? "rgba(255, 255, 255, 0.25)"
-                      : "rgba(0, 0, 0, 0.25)",
-                  },
-                  ticks: {
-                    color: textColor,
-                  },
-                },
-                x: {
-                  grid: {
-                    display: false,
-                  },
-                  ticks: {
-                    color: textColor,
-                  },
-                },
+                y: { beginAtZero: true, grid: { color: isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)" }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
+                x: { grid: { display: false }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
               },
             },
           });
         }
 
-        // 添加页面滚动动画
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("animate-fade-in");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 },
-        );
-
-        document
-          .querySelectorAll(".card-hover:not(.animate-fade-in)")
-          .forEach((card) => {
-            observer.observe(card);
-          });
+        // 页面初始语种加载
+        const defaultLang = localStorage.getItem("preferred-lang") || (navigator.language.startsWith('en') ? 'en' : 'zh');
+        applyLanguage(defaultLang);
       });
+
+      function updateChartLanguage(lang) {
+        if (!currentChartInstance) return;
+        currentChartInstance.data.labels = i18nDictionary[lang].chart_labels;
+        currentChartInstance.data.datasets[0].label = i18nDictionary[lang].chart_dataset;
+        currentChartInstance.update();
+      }
+
+      function applyChartTheme(chart, isDark) {
+        const gridColor = isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)";
+        const tickColor = isDark ? "#9CA3AF" : "#4B5563";
+        chart.options.scales.y.grid.color = gridColor;
+        chart.options.scales.y.ticks.color = tickColor;
+        chart.options.scales.x.ticks.color = tickColor;
+        chart.update();
+      }
     </script>
   </body>
 </html>
