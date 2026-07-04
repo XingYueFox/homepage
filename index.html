@@ -232,7 +232,7 @@
           -webkit-text-fill-color: transparent;
         }
         .bg-gradient-custom {
-          background: linear-gradient(135deg, #035df8);/*头像框下按钮颜色 #6d03f8,, #ff3cff, #ff6f2c*/
+          background: linear-gradient(135deg, #035df8);/*头像框下按钮颜色, , #6d03f8, #ff3cff, #ff6f2c*/
         }
         .card-hover {
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -557,7 +557,7 @@
                 href="https://github.com/xingyuefox"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-blue-200 font-medium hover:opacity-80 transition-opacity"
+                class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-custom text-white dark:bg-blue300 font-medium hover:opacity-80 transition-opacity"
               >
                 <i class="fa-brands fa-github mr-2"></i>
                 <span>访问我的 Github</span>
@@ -685,8 +685,8 @@
               </ul>
 
               <h3 class="text-2xl font-bold mt-8 mb-2 text-neutral-900 dark:text-white">🚧维护概览</h3>
-              <p class="text-neutral-600 dark:text-neutral-400"><span>最后维护于 </span>2026/06/19</p>
-              <p class="text-neutral-600 dark:text-neutral-400 mt-0.5">[6月更新]此次为2026年下半年度累积更新</p>
+              <p class="text-neutral-600 dark:text-neutral-400">最后维护于 2026/07/05</p>
+              <p class="text-neutral-600 dark:text-neutral-400 mt-0.5">[7月更新]此次更新修复了已知问题</p>
             </div>
           </div>
 
@@ -710,7 +710,7 @@
                 </div>
                 <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面</p>
                 <div class="flex justify-between items-center text-xs text-neutral-400">
-                  <span>Google Drive</span><span>2026-06-14</span>
+                  <span>Google Drive</span><span>2026-06-27</span>
                 </div>
               </a>
 
@@ -763,11 +763,11 @@
           星月Fox的主页
         </h3>
         <span class="px-3 py-2 rounded-lg text-sm flex items-center text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10">
-        <i class="fa-solid fa-arrows-rotate"></i>最近更新：2026/06/21
+        <i class="fa-solid fa-arrows-rotate"></i>最近更新：2026/07/04
         </span><br>
 
         <span class="px-3 py-2 rounded-lg text-sm flex items-center text-neutral-800 dark:text-neutral-200 bg-neutral-500/10 border border-neutral-500/10">
-        版本：26.0.3005<br>代号：26.5[下半年度更新第三次追加更新]<br>此版本修复了爆闪、渲染出错以及部分性能bug<br>改进按钮交互动画，修复了按钮乱跳的bug<br>改进了深色模式以及毛玻璃实现效果<br>重新设计选项菜单<br>由于涉及文化问题，语言功能暂时停用
+        版本：26.0.3200<br>代号：26.5<br>此版本修复了老旧设备上的性能问题<br>由于涉及文化问题，语言功能暂时停用
         
         </span><br>
         <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-5 leading-relaxed">
@@ -815,7 +815,7 @@
         <div class="flex justify-end">
           <button
             id="close-about-btn"
-            class="px-14 py-1.5 bg-gradient-custom text-blue-100 rounded-lg font-semibold hover:opacity-80 transition-opacity text-blue-200 shadow-md"
+            class="px-14 py-1.5 bg-gradient-custom text-white rounded-lg font-semibold hover:opacity-80 transition-opacity text-blue-200 shadow-md"
           >
             好
           </button>
@@ -998,7 +998,7 @@
         });
 
 
-        // --- 选项二：沉浸模式核心控制 (完美还原最初分享的纯净淡出逻辑) ---
+        // --- 选项二：沉浸模式核心控制---
         const minimalModeToggle = document.getElementById("minimal-mode-toggle");
         const immersiveStatus = document.getElementById("immersive-status");
         const bgImage = document.getElementById("main-bg-image");
@@ -1050,7 +1050,7 @@
         });
 
 
-        // --- 选项三：关闭背景控制 (极致纯黑背板完美融合) ---
+        // --- 选项三：关闭背景控制---
         const bgVisibilityToggle = document.getElementById("bg-visibility-toggle");
         const bgStatus = document.getElementById("bg-status");
         const bgOverlay = document.getElementById("main-bg-overlay");
@@ -1087,13 +1087,13 @@
           currentChartInstance = new Chart(ctx, {
             type: "line",
             data: {
-              labels: ["网站运维", "编程语言", "学业", "交友", "世界观测", "搞事情", "探究", "强迫症", "魔法"],
+              labels: ["前端开发", "学业", "交友", "抗压性", "世界观测", "探究", "创造力", "强迫症", "魔法"],
               datasets: [
                 {
                   label: "能力水平",
-                  data: [36, 30, 24, 10, 72, 50, 74, 90, 100],
+                  data: [37, 30, 24, 40, 77, 60, 74, 90, 97],
                   borderColor: "#2575fc",
-                  backgroundColor: "rgba(96, 165, 250, 0.25)",
+                  backgroundColor: "#61a6fa40",
                   tension: 0.4,
                   fill: true,
                 },
