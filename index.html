@@ -311,13 +311,13 @@
         .md-ripple-effect {
           position: absolute;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.05) 45%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 45%, transparent 70%);
           transform: scale(0);
           animation: md-ripple-anim 3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
           pointer-events: none;
         }
         .dark .md-ripple-effect {
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.2) 45%, transparent 70%);
         }
         @keyframes md-ripple-anim {
           0% {
@@ -707,7 +707,7 @@
               </p>
               
               <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">📖我的项目</h3>
-              <p class="text-neutral-700 dark:text-neutral-300">HomePage部署:基于Flask的个人主页</p>
+              <p class="text-neutral-700 dark:text-neutral-300">我的个人主页：当前网页</p>
               <p class="text-neutral-700 dark:text-neutral-300 mt-1">
                 <span>目前正在使用</span>
                 <a href="https://fluent2.microsoft.design/" target="_blank" class="hover:underline">Fluent 2 Design设计规范</a>
@@ -921,6 +921,18 @@
             </div>
             <label class="switch-toggle">
               <input type="checkbox" id="settings-transparency-toggle" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <!-- 测试 -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="font-semibold text-neutral-900 dark:text-white">移动设备优化（实验性）</div>
+              <div class="text-xs text-neutral-500 dark:text-neutral-400">对于触屏设备和移动设备布局的特调</div>
+            </div>
+            <label class="switch-toggle">
+              <input type="" id="" checked />
               <span class="switch-slider"></span>
             </label>
           </div>
