@@ -1,0 +1,1981 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星月Fox的主页</title>
+    
+    <!-- 防闪烁脚本：防止深色模式下初始化闪白 -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (savedTheme !== "light" && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        // 防止透明度效果初始化闪烁
+        const savedTransparency = localStorage.getItem("transparency-enabled");
+        if (savedTransparency === "false") {
+          document.documentElement.classList.add("no-transparency");
+        } else {
+          document.documentElement.classList.remove("no-transparency");
+        }
+      })();
+    </script>
+
+    <link
+      rel="icon"
+      href="img/profile/profile_xingyue_fox.jpg"
+      type="image/png"
+    />
+    <svg width="0" height="0" style="position: absolute">
+      <filter id="roundAvatar">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+          result="goo"
+        />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </svg>
+    <style>
+      link[rel="icon"] {
+        filter: url(#roundAvatar);
+      }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="lib/fa/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- 引入 CDN FontAwesome 图标，保证在没有本地库时也能完美加载图标 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+      // 应用 Markdown 样式的函数
+      function applyMarkdownStyles() {
+        const readmeContent = document.getElementById("readme-content");
+        if (readmeContent) {
+          const h1Elements = readmeContent.querySelectorAll("h1");
+          const h2Elements = readmeContent.querySelectorAll("h2");
+          const h3Elements = readmeContent.querySelectorAll("h3");
+          const h4Elements = readmeContent.querySelectorAll("h4");
+          const pElements = readmeContent.querySelectorAll("p");
+          const ulElements = readmeContent.querySelectorAll("ul");
+          const olElements = readmeContent.querySelectorAll("ol");
+          const liElements = readmeContent.querySelectorAll("li");
+          const codeElements = readmeContent.querySelectorAll("code");
+          const preElements = readmeContent.querySelectorAll("pre");
+          const aElements = readmeContent.querySelectorAll("a");
+          const imgElements = readmeContent.querySelectorAll("img");
+          const blockquoteElements =
+            readmeContent.querySelectorAll("blockquote");
+          const hrElements = readmeContent.querySelectorAll("hr");
+          const tableElements = readmeContent.querySelectorAll("table");
+
+          h1Elements.forEach((el) => {
+            if (!el.className.includes("font-bold")) {
+              el.className =
+                "text-4xl font-bold mt-8 mb-4 text-neutral-900 dark:text-white border-b pb-3 border-neutral-300 dark:border-neutral-700";
+            }
+          });
+          h2Elements.forEach((el) => {
+            if (!el.className.includes("font-bold")) {
+              el.className =
+                "text-3xl font-bold mt-6 mb-3 text-neutral-900 dark:text-white border-b pb-2 border-neutral-300 dark:border-neutral-700";
+            }
+          });
+          h3Elements.forEach((el) => {
+            if (!el.className.includes("font-bold")) {
+              el.className =
+                "text-2xl font-bold mt-5 mb-2 text-neutral-900 dark:text-white";
+            }
+          });
+          h4Elements.forEach((el) => {
+            if (!el.className.includes("font-bold")) {
+              el.className =
+                "text-xl font-bold mt-4 mb-2 text-neutral-900 dark:text-white";
+            }
+          });
+          pElements.forEach((el) => {
+            if (!el.className.includes("text-neutral")) {
+              el.className =
+                "mb-4 text-neutral-700 dark:text-neutral-300 leading-relaxed text-base";
+            }
+          });
+          ulElements.forEach((el) => {
+            if (!el.className.includes("list-disc")) {
+              el.className =
+                "list-disc list-inside mb-4 ml-4 text-neutral-700 dark:text-neutral-300 space-y-1 text-base";
+            }
+          });
+          olElements.forEach((el) => {
+            if (!el.className.includes("list-decimal")) {
+              el.className =
+                "list-decimal list-inside mb-4 ml-4 text-neutral-700 dark:text-neutral-300 space-y-1 text-base";
+            }
+          });
+          liElements.forEach((el) => {
+            if (!el.className.includes("mb")) {
+              el.className = "mb-1";
+            }
+          });
+          codeElements.forEach((el) => {
+            if (
+              el.parentElement.tagName !== "PRE" &&
+              !el.className.includes("bg-neutral")
+            ) {
+              el.className =
+                "bg-neutral-200 dark:bg-neutral-700 px-2 py-1 rounded text-red-600 dark:text-red-400 font-mono text-sm break-words";
+            }
+          });
+          preElements.forEach((el) => {
+            if (!el.className.includes("bg-neutral-900")) {
+              el.className =
+                "bg-neutral-900 dark:bg-neutral-950 text-neutral-100 p-4 rounded-xl overflow-x-auto mb-4 text-sm";
+            }
+          });
+          // 链接文本颜色
+          aElements.forEach((el) => {
+            // 如果是游戏板块内的链接，跳过 Markdown 样式覆写
+            if (el.closest('.game-card')) return;
+            if (!el.className.includes("text-blue")) {
+              el.className =
+                "text-blue-950 dark:text-blue-100 hover:underline font-semibold";
+            }
+          });
+          imgElements.forEach((el) => {
+            // 如果是游戏板块内的图片，跳过 Markdown 样式覆写
+            if (el.closest('.game-card')) return;
+            if (!el.className.includes("max-w-full")) {
+              el.className = "max-w-full h-auto rounded-xl my-4 shadow-lg";
+            }
+          });
+          blockquoteElements.forEach((el) => {
+            if (!el.className.includes("border-l")) {
+              el.className =
+                "border-l-4 border-neutral-400 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-800 pl-4 py-2 my-4 text-neutral-700 dark:text-neutral-300 italic";
+            }
+          });
+          hrElements.forEach((el) => {
+            if (!el.className.includes("border")) {
+              el.className =
+                "my-6 border-t border-neutral-300 dark:border-neutral-700";
+            }
+          });
+          tableElements.forEach((el) => {
+            if (!el.className.includes("min-w-full")) {
+              el.className =
+                "min-w-full border-collapse border border-neutral-300 dark:border-neutral-700 my-4";
+            }
+          });
+
+          const thElements = readmeContent.querySelectorAll("th");
+          const tdElements = readmeContent.querySelectorAll("td");
+
+          thElements.forEach((el) => {
+            if (!el.className.includes("bg")) {
+              el.className =
+                "bg-neutral-200 dark:bg-neutral-700 border border-neutral-300 dark:border-neutral-600 px-4 py-2 font-semibold text-neutral-900 dark:text-white text-left";
+            }
+          });
+
+          tdElements.forEach((el) => {
+            if (!el.className.includes("border")) {
+              el.className =
+                "border border-neutral-300 dark:border-neutral-700 dark:bg-black/40-4 py-2 text-neutral-700 dark:text-neutral-300";
+            }
+          });
+        }
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", applyMarkdownStyles);
+      } else {
+        applyMarkdownStyles();
+      }
+    </script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "#2575fc",
+                dark: "#60a5fa",
+              },
+              secondary: {
+                DEFAULT: "#2575fc",
+                dark: "#60a5fa",
+              },
+              "primary-dark": "#2575fc",
+              "secondary-dark": "#60a5fa",
+            },
+            fontFamily: {
+              // 西文 Fluent UI 字体序列
+              sans: ["Segoe UI Variable", "Segoe UI", "Inter", "system-ui", "sans-serif"],
+            },
+            animation: {
+              float: "float 3s ease-in-out infinite",
+              "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .text-gradient {
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .bg-gradient-custom {
+          background: linear-gradient(135deg, #035df8);/*头像框下按钮颜色*/
+        }
+        .card-hover {
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+          transform: translateY(-4px);
+          box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.08),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* 云母模糊效果底色 */
+        .glass-panel {
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+          position: relative;
+          overflow: hidden;
+        }
+        .glass-panel::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #ffffffc4, transparent);
+          animation: border-glow 5s ease-in-out infinite;
+        }
+        .glass-panel::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #ffffffc4, transparent);
+          animation: border-glow 5s ease-in-out infinite reverse;
+        }
+        /* 深色模式下的边框光效 */
+        .dark .glass-panel::after {
+          background: linear-gradient(90deg, transparent, #ffffff1f, transparent);
+        }
+        .dark .glass-panel::before {
+          background: linear-gradient(90deg, transparent, #ffffff1f, transparent);
+        }
+        .dark .glass-panel {
+          background: rgba(0, 0, 0, 0.5);
+          border: 1px solid rgba(179, 179, 179, 0.1);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        @keyframes border-glow {
+          0%,
+          100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+
+        /* 涟漪动画 */
+        .md-ripple-container {
+          position: relative ;
+          overflow: hidden ;
+        }
+        .md-ripple-effect {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 45%, transparent 70%);
+          transform: scale(0);
+          animation: md-ripple-anim 2.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+          pointer-events: none;
+        }
+        .dark .md-ripple-effect {
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.2) 45%, transparent 70%);
+        }
+        @keyframes md-ripple-anim {
+          0% {
+            transform: scale(0);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(4.5);
+            opacity: 0;
+          }
+        }
+      }
+    </style>
+    <style>
+      body {
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+      /* 无背景时底色 */
+      body {
+        background-color: #ffffff;
+      }
+
+      .dark body {
+        background-color: #171717;
+      }
+
+      /* 背景图片容器 */
+      .bg-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("img/bg/background_light.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+        transform: scale(1.05);
+        transform: scale(1.1); /* 略微放大以避免边缘出现空白 */
+      }
+
+      .dark .bg-image {
+        background-image: url("img/bg/background_dark.jpg");
+      }
+
+      .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffffd6;
+        opacity: 0.15;
+        transition: opacity 0.5s ease, background-color 0.5s ease;
+      }
+
+      .dark .bg-overlay {
+        background-color: #171717d6;
+        opacity: 0.65; /* 加载背景时底色 */
+      }
+
+      .avatar-glow {
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        from { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+        to { box-shadow: 0 0 15px rgba(255, 255, 255, 0.25); }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* 顶部导航动效 */
+      .animate-fade-down {
+        animation: fadeDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .readme-content {
+        animation: slideIn 0.8s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);}
+      }
+      .repo-item {
+        transition: all 0.3s ease;
+      }
+      .repo-item:hover {
+        transform: translateX(4px);
+      }
+      .tech-icon {
+        filter: drop-shadow(0 0 5px #60a5fa);
+      }
+
+      /* 选项菜单：动效 */
+      #options-menu {
+        transform: scale(0.96) translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      }
+      #options-menu.show {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* 弹出式仿二级菜单核心样式 */
+      #lang-sub-panel {
+        transform: scale(0.95) translateX(6px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      }
+      #lang-sub-panel.show {
+        transform: scale(1) translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* 自定义开关样式 */
+      .switch-toggle {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 22px;
+      }
+      .switch-toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .switch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: background-color .3s cubic-bezier(0.16, 1, 0.3, 1);
+        border-radius: 9999px;
+      }
+      .dark .switch-slider {
+        background-color: #444;
+      }
+      .switch-slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), background-color .3s cubic-bezier(0.16, 1, 0.3, 1);
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      }
+      input:checked + .switch-slider {
+        background: linear-gradient(135deg, #035df8, #2575fc); /* 使用主页图标按钮渐变色 */
+      }
+      input:checked + .switch-slider:before {
+        transform: translateX(22px);
+      }
+
+      /* 禁用透明效果时的覆盖样式 */
+      .no-transparency .glass-panel {
+        background: rgb(255, 255, 255) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+        border-color: rgba(0, 0, 0, 0.15) ;
+      }
+      .no-transparency.dark .glass-panel,
+      .dark .no-transparency .glass-panel {
+        background: rgb(23, 23, 23) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+        border-color: rgba(255, 255, 255, 0.1) ;
+      }
+      .no-transparency nav {
+        background: rgb(255, 255, 255) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+      }
+      .no-transparency.dark nav,
+      .dark .no-transparency nav {
+        background: rgb(23, 23, 23) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+      }
+      .no-transparency #options-menu {
+        background: rgb(245, 245, 245) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+      }
+      .no-transparency.dark #options-menu,
+      .dark .no-transparency #options-menu {
+        background: rgb(23, 23, 23) ;
+        backdrop-filter: none ;
+        -webkit-backdrop-filter: none ;
+      }
+      .no-transparency .bg-image {
+        filter: none ; /* 禁用高斯模糊 */
+      }
+    </style>
+  </head>
+  <body class="text-neutral-800 dark:text-neutral-200 min-h-screen">
+    <div class="bg-container">
+      <div id="main-bg-image" class="bg-image"></div>
+      <div id="main-bg-overlay" class="bg-overlay"></div>
+    </div>
+
+    <!-- 顶部栏展开时下方遮罩 -->
+    <div 
+      id="backdrop-1" 
+      class="fixed inset-0 z-40 bg-black/10 dark:bg-black/30 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    ></div>
+
+    <!-- 顶部导航栏 -->
+    <nav
+      id="main-navbar"
+      class="fixed w-full top-0 z-50 bg-white/45 dark:bg-black/45 backdrop-blur-md transition-all duration-300 border-b border-transparent"
+    >
+      <!-- 容器 -->
+      <div class="container mx-auto px-4 py-2 flex justify-between items-center relative z-50">
+        
+        <!-- 左侧菜单组 -->
+        <div class="flex items-center space-x-1 md:space-x-2">
+          
+          <!-- 星月Fox的主页展开栏 -->
+          <div 
+            id="nav-logo"
+            class="flex items-center space-x-1.5 cursor-pointer py-1.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+          >
+            <img
+              src="img/profile/profile_xingyue_fox.jpg"
+              alt="星月Fox"
+              class="w-6 h-6 rounded-full border border-white dark:border-neutral-700 shadow-sm"
+            />
+            <span class="font-bold text-base tracking-wide">星月Fox的主页</span>
+            <i class="fa-solid fa-chevron-down text-[9px] opacity-40 transition-transform duration-300" id="nav-logo-arrow"></i>
+          </div>
+
+          <!-- 横向导航组 -->
+          <div class="hidden md:flex items-center space-x-0.5 md:space-x-1">
+            <button 
+              id="nav-test1-btn" 
+              class="nav-tab-btn flex items-center space-x-1 py-1.5 px-2.5 rounded-lg text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+            >
+              <span>板块1</span>
+            </button>
+            <button 
+              id="nav-test2-btn" 
+              class="nav-tab-btn flex items-center space-x-1 py-1.5 px-2.5 rounded-lg text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+            >
+              <span>板块2</span>
+            </button>
+            <button 
+              id="nav-test3-btn" 
+              class="nav-tab-btn flex items-center space-x-1 py-1.5 px-2.5 rounded-lg text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+            >
+              <span>板块3</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- 右侧按钮 -->
+        <div class="flex items-center space-x-2">
+          <!-- 收纳按钮 -->
+          <button
+            id="nav-narrow-collapse-btn"
+            aria-label="展开测试模块"
+            class="flex md:hidden w-9 h-9 rounded-full text-neutral-800 dark:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all items-center justify-center"
+          >
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="narrow-arrow-icon"></i>
+          </button>
+
+          <!-- 搜索 -->
+          <button
+            id="nav-search-btn"
+            aria-label="搜索"
+            class="w-9 h-9 rounded-full text-neutral-800 dark:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center"
+          >
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          </button>
+          
+          <!-- 汉堡菜单 -->
+          <button
+            id="nav-hamburger-btn"
+            aria-label="菜单"
+            class="w-9 h-9 rounded-full text-neutral-800 dark:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center relative"
+          >
+            <div class="w-3.5 h-3 flex flex-col justify-between items-center transition-transform duration-300">
+              <span id="hamburger-line-1" class="w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-left"></span>
+              <span id="hamburger-line-2" class="w-full h-0.5 bg-current rounded-full transition-all duration-300"></span>
+              <span id="hamburger-line-3" class="w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-left"></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 顶部拉伸主面板 -->
+      <div 
+        id="apple-dropdown" 
+        class="w-full overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] h-0 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-2xl"
+      >
+        <div class="container mx-auto px-4 md:px-8 py-6" id="dropdown-inner-container">
+          
+          <!-- 窄屏自适应收纳排布面板 -->
+          <div id="panel-narrow-box" class="hidden animate-fade-down text-left">
+            <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">板块导航</h4>
+            <div class="flex flex-col space-y-1 max-w-sm">
+              <button onclick="openApplePanel('test1', true)" class="w-full text-left py-3 px-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all flex items-center justify-between text-sm font-semibold">
+                <span>测试板块 1</span>
+                <i class="fa-solid fa-chevron-right text-xs opacity-40"></i>
+              </button>
+              <button onclick="openApplePanel('test2', true)" class="w-full text-left py-3 px-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all flex items-center justify-between text-sm font-semibold">
+                <span>测试板块 2</span>
+                <i class="fa-solid fa-chevron-right text-xs opacity-40"></i>
+              </button>
+              <button onclick="openApplePanel('test3', true)" class="w-full text-left py-3 px-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all flex items-center justify-between text-sm font-semibold">
+                <span>测试板块 3</span>
+                <i class="fa-solid fa-chevron-right text-xs opacity-40"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 联系方式列表 -->
+          <div id="panel-contacts" class="hidden animate-fade-down text-left">
+            <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">星月Fox的联系方式</h4>
+            <div class="flex flex-col space-y-0.5 max-w-lg">
+              <a href="https://space.bilibili.com/3493117999188634" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <i class="fa-brands fa-bilibili w-5 text-center text-pink-500 mr-3 text-base"></i>Bilibili
+              </a>
+              <a href="https://github.com/XingYueFox" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <i class="fa-brands fa-github w-5 text-center text-neutral-900 dark:text-white mr-3 text-base"></i>Github
+              </a>
+              <a href="" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <i class="fa-brands fa-qq w-5 text-center text-sky-500 mr-3 text-base"></i>QQ
+              </a>
+              <a href="https://t.me/xingyuefox" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <i class="fa-brands fa-telegram w-5 text-center text-sky-500 mr-3 text-base"></i>Telegram
+              </a>
+              <a href="mailto:xingyue_fox@outlook.com" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <i class="fa-regular fa-envelope w-5 text-center text-blue-500 mr-3 text-base"></i>我的邮箱
+              </a>
+            </div>
+          </div>
+
+          <!-- 板块1 下拉栏 -->
+          <div id="panel-test1" class="hidden animate-fade-down text-left">
+            <!-- 收纳菜单返回菜单按钮 -->
+            <div class="flex items-center mb-3 md:hidden">
+              <button onclick="openApplePanel('narrow', true)" class="flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold text-primary dark:text-primary-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+                <span>返回菜单</span>
+              </button>
+            </div>
+            <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">测试导航 1</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-xl">
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold block text-neutral-800 dark:text-neutral-200">
+                <div class="font-bold text-neutral-900 dark:text-white">测试选项 1-A</div>
+                <div class="text-xs text-neutral-400 font-normal mt-0.5">这是测试1的第一个子功能项</div>
+              </a>
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold block text-neutral-800 dark:text-neutral-200">
+                <div class="font-bold text-neutral-900 dark:text-white">测试选项 1-B</div>
+                <div class="text-xs text-neutral-400 font-normal mt-0.5">这是测试1的第二个子功能项</div>
+              </a>
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold block text-neutral-800 dark:text-neutral-200">
+                <div class="font-bold text-neutral-900 dark:text-white">测试选项 1-C</div>
+                <div class="text-xs text-neutral-400 font-normal mt-0.5">这是测试1的第三个子功能项</div>
+              </a>
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold block text-neutral-800 dark:text-neutral-200">
+                <div class="font-bold text-neutral-900 dark:text-white">测试选项 1-D</div>
+                <div class="text-xs text-neutral-400 font-normal mt-0.5">这是测试1的第四个子功能项</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 板块2 下拉栏 -->
+          <div id="panel-test2" class="hidden animate-fade-down text-left">
+            <div class="flex items-center mb-3 md:hidden">
+              <button onclick="openApplePanel('narrow', true)" class="flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold text-primary dark:text-primary-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+                <span>返回菜单</span>
+              </button>
+            </div>
+            <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">测试导航 2</h4>
+            <div class="flex flex-col space-y-1 max-w-md">
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
+                <span>测试子项 2-A</span>
+              </a>
+              <a href="#" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
+                <span>测试子项 2-B</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 板块3 下拉栏 -->
+          <div id="panel-test3" class="hidden animate-fade-down text-left">
+            <div class="flex items-center mb-3 md:hidden">
+              <button onclick="openApplePanel('narrow', true)" class="flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold text-primary dark:text-primary-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+                <span>返回菜单</span>
+              </button>
+            </div>
+            <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">测试导航 3</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-xl">
+              <a href="#" class="py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 block">选项 3-01</a>
+              <a href="#" class="py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 block">选项 3-02</a>
+              <a href="#" class="py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 block">选项 3-03</a>
+              <a href="#" class="py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 block">选项 3-04</a>
+              <a href="#" class="py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 block">选项 3-05</a>
+            </div>
+          </div>
+
+          <!-- 搜索界面 -->
+          <div id="panel-search" class="hidden animate-fade-down text-left">
+            <div class="max-w-xl">
+              <div class="relative w-full mb-4">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-neutral-400 dark:text-neutral-500 text-sm"></i>
+                <input 
+                  type="text" 
+                  id="smart-search-input"
+                  placeholder="搜索动态、联系方式和库" 
+                  class="w-full pl-9 pr-9 py-2 rounded-xl bg-neutral-200/50 dark:bg-black/30 border border-transparent focus:border-primary/50 dark:focus:border-primary-dark/50 focus:outline-none text-sm text-neutral-800 dark:text-white transition-all shadow-inner"
+                />
+                <button id="search-clear-btn" class="absolute right-3.5 top-3 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 transition-colors hidden">
+                  <i class="fa-solid fa-circle-xmark text-sm"></i>
+                </button>
+              </div>
+
+              <!-- 搜索建议 -->
+              <div id="search-placeholder-tips" class="space-y-3">
+                <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase px-1">常用检索</h4>
+                <div class="flex flex-wrap gap-1.5">
+                  <button onclick="triggerQuickSearch('Minecraft')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Minecraft</button>
+                  <button onclick="triggerQuickSearch('鸣潮')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">鸣潮</button>
+                  <button onclick="triggerQuickSearch('动态')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">最新动态</button>
+                  <button onclick="triggerQuickSearch('邮箱')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">联系邮箱</button>
+                </div>
+              </div>
+
+              <!-- 搜索结果 -->
+              <div id="search-results-wrapper" class="hidden space-y-3">
+                <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase px-1" id="search-results-title">检索结果 (0)</h4>
+                <div id="search-results-list" class="flex flex-col space-y-1 max-h-56 overflow-y-auto pr-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧菜单 -->
+          <div id="panel-menu" class="hidden animate-fade-down text-left">
+            <div class="relative overflow-hidden w-full" id="menu-slide-box">
+              <div class="flex transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-[200%] " id="menu-slide-track">
+                
+                <!-- 菜单主界面 -->
+                <div class="w-1/2 flex-shrink-0 pr-4">
+                  <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">选项菜单</h4>
+                  <div class="flex flex-col space-y-1 max-w-sm">
+                    <button 
+                      id="menu-to-settings-btn"
+                      class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between text-sm font-semibold text-neutral-800 dark:text-neutral-200"
+                    >
+                      <span class="flex items-center"><i class="fa-solid fa-gear w-5 opacity-70 mr-3"></i>个性化设置</span>
+                      <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button 
+                      id="menu-to-about-btn"
+                      class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between text-sm font-semibold text-neutral-800 dark:text-neutral-200"
+                    >
+                      <span class="flex items-center"><i class="fa-solid fa-circle-info w-5 opacity-70 mr-3"></i>关于此页面</span>
+                      <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 菜单二级层界面 -->
+                <div class="w-1/2 flex-shrink-0 pl-4 pr-1 text-left" id="menu-secondary-container">
+                  <!-- 动态插入具体二级设置 -->
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-4 pt-24 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1 animate-fade-in">
+          <!-- 左侧主面板 -->
+          <div
+            class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6 "
+          >
+            <div class="flex justify-center mb-6">
+              <img
+                src="img/profile/profile_xingyue_fox.jpg"
+                alt="星月Fox"
+                class="w-36 h-36 rounded-full border-4 border-white dark:border-neutral-700 shadow-lg avatar-glow"
+              />
+              </div>
+            <div class="text-center mb-6">
+              <h1 class="text-2xl font-bold mb-2">星月Fox</h1>
+              <p class="text-neutral-600 dark:text-neutral-400 mb-4 text-base">
+                独立思考，明辨是非
+              </p>
+              <a
+                href="https://github.com/xingyuefox"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="md-ripple-container inline-flex items-center px-4 py-2 rounded-[8px] bg-gradient-custom text-white dark:bg-blue300 font-medium hover:opacity-90 transition-opacity"
+              >
+                <i class="fa-brands fa-github mr-2"></i>
+                <span>访问我的 Github</span>
+              </a>
+            </div>
+            <!-- 主要板块 -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="md-ripple-container md-ripple-dark bg-neutral-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
+                  <a href="https://steamcommunity.com/profiles/76561198761960812/" target="_blank" class="hover:underline">Steam</a>
+                </div>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                  加个好友~
+                </div>
+              </div>
+              <div class="md-ripple-container md-ripple-dark bg-neutral-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
+                  <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline">Email</a>
+                </div>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                  联系我
+                </div>
+              </div>
+            </div>
+            <div class="mt-6">
+              <h3 class="text-lg font-semibold mb-3">技术栈</h3>
+              <div class="flex flex-wrap gap-2">
+                <!-- 技术标签 -->
+                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>HTML/CSS
+                </span>
+                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-violet-700 dark:text-violet-300 bg-violet-500/10 border border-violet-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>Python
+                </span>
+                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-sky-600 dark:text-sky-300 bg-sky-500/10 border border-sky-500/10">
+                  <i class="fa-solid fa-code mr-1 tech-icon"></i>JavaScript
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6 mt-6 animate-fade-in"
+            style="animation-delay: 0.2s"
+          >
+            <h3 class="text-lg font-semibold mb-3">星月Fox的概览</h3>
+            <div class="h-64">
+              <canvas id="activityChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="intro-panel" style="animation-delay: 0.1s">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+              星月Fox是谁？
+            </h2>
+            <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
+              海内存知己，天涯若比邻。你好👋很高兴能在这里见到，我是星月Fox，17岁高中生。
+            </p>
+            <p class="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
+              技术极客，对于UI设计/前端感兴趣。擅长Windows系统的各种乱玩（
+            </p>
+          </div>
+
+          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="readme-panel" style="animation-delay: 0.3s">
+            <div class="max-w-none text-base leading-relaxed" id="readme-content">
+              <h3 class="text-2xl font-bold mt-2 mb-3 text-neutral-900 dark:text-white" id="recently">🥰很高兴认识你</h3>
+              <p class="mb-2 text-neutral-700 dark:text-neutral-300">交换友链？</p>
+              <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+                <span>向我</span>
+                <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline font-semibold">发送邮件✉️</a>，
+                <span>或者使用其他联系方式？请见页尾</span>
+              </p>
+              
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">📖我的项目</h3>
+              <p class="text-neutral-700 dark:text-neutral-300">我的个人主页：当前网页</p>
+              <p class="text-neutral-700 dark:text-neutral-300 mt-1">
+                <span>目前正在使用</span>
+                <a href="https://fluent2.microsoft.design/" target="_blank" class="hover:underline">Fluent 2 Design设计规范</a>
+                <span>改进此页面</span>
+              </p>
+
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">🎮游戏标签</h3>
+              <p class="mb-2 text-neutral-700 dark:text-neutral-300"></p>
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+                <!-- Minecraft 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                    <img src="img/games/minecraft_bg.jpg" alt="Minecraft" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://Minecraft.net" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/minecraft_logo.jpg" alt="Minecraft Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">Minecraft</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- 赛博朋克2077 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-500/40 dark:hover:shadow-yellow-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                    <img src="img/games/cyberpunk_2077_bg.jpg" alt="赛博朋克2077" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-yellow-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://www.cyberpunk.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/cyberpunk_2077_icon.jpg" alt="赛博朋克2077 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">赛博朋克2077</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- 地平线 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/40 dark:hover:shadow-pink-700/20">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                    <img src="img/games/forza_horizon_6_bg.jpg" alt="地平线" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-pink-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://forza.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/forza_horizon_6_logo.jpg" alt="地平线 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">地平线</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- 鸣潮 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40 dark:hover:shadow-sky-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                    <img src="img/games/wuthering_waves_bg.jpg" alt="鸣潮" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://mc.kurogames.com" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/wuthering_waves_logo.jpg" alt="鸣潮 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">鸣潮</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">🌐在互联网上找到我</h3>
+              <ul class="list-disc list-inside space-y-2 font-semibold">
+                <li><a href="https://space.bilibili.com/3493117999188634" target="_blank" class="hover:underline">Bilibili</a></li>
+                <li><a href="https://github.com/XingYueFox" target="_blank" class="hover:underline">Github</a></li>
+                <li><a href="https://namemc.com/XingYue_Fox" target="_blank" class="hover:underline">NameMC</a></li>
+                <li><a href="https://t.me/xingyuefox" target="_blank" class="hover:underline">Telegram</a></li>
+                <li><a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline">联系我的邮箱></a></li>
+              </ul>
+
+              <h3 class="text-2xl font-bold mt-8 mb-2 text-neutral-900 dark:text-white">🚧维护概览</h3>
+              <p class="text-neutral-600 dark:text-neutral-400">最后维护于 2026/08/05</p>
+              <p class="text-neutral-600 dark:text-neutral-400 mt-0.5">[8月更新]此次更新修复了已知问题</p>
+            </div>
+          </div>
+
+          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="news-panel" style="animation-delay: 0.5s">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+              <i class="fa-solid fa-code text-primary dark:text-primary-dark mr-2"></i>
+              <span>动态</span>
+            </h2>
+            <div class="space-y-4">
+              <a
+                href="https://drive.google.com/drive/folders/15v32ha1JSSh7SUVVIhJyqWlZYyvI0mOw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
+              >
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">星月在Minecraft中</h3>
+                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
+                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>3分钟</span>
+                  </span>
+                </div>
+                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面</p>
+                <div class="flex justify-between items-center text-xs text-neutral-400">
+                  <span>Google Drive</span><span>2026-06-27</span>
+                </div>
+              </a>
+
+              <a
+                href="https://drive.google.com/drive/folders/1GwBykGeMJ3pF_mcbdA9TX9RgzC_3dyzQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
+              >
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">鸣潮壁纸（含动态）</h3>
+                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
+                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>15分钟</span>
+                  </span>
+                </div>
+                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">由X用户@KiriyumeBun提供文件，包含剧情CG图，版本活动图及版本动态视频封面</p>
+                <div class="flex justify-between items-center text-xs text-neutral-400">
+                  <span>Google Drive</span><span>2026-07-10</span>
+                </div>
+              </a>
+           
+              <a
+                href="https://bluearchive.cafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
+              >
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">？这是啥来着</h3>
+                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
+                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>阅读时间未知</span>
+                  </span>
+                </div>
+                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">先放个咖啡厅（</p>
+                <div class="flex justify-between items-center text-xs text-neutral-400">
+                  <span>BlueArchive Cafe</span><span>2026-06-24</span>
+                </div>
+              </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 保留原有设置/关于弹窗兼容所需的基础隐藏结构，防外部JS意外引用 -->
+    <div id="settings-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden">
+      <input type="checkbox" id="settings-minimal-toggle" />
+      <input type="checkbox" id="settings-bg-toggle" checked />
+      <input type="checkbox" id="settings-transparency-toggle" checked />
+      <button id="theme-light-btn"></button>
+      <button id="theme-dark-btn"></button>
+      <button id="theme-auto-btn"></button>
+      <div id="theme-active-indicator"></div>
+      <button id="close-settings-btn"></button>
+      <div id="settings-modal-overlay"></div>
+      <div id="settings-modal-content"></div>
+    </div>
+    <div id="about-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="close-about-btn"></button><div id="about-modal-overlay"></div><div id="about-modal-content"></div></div>
+    <div id="options-menu" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="settings-modal-btn"></button><button id="about-btn"></button></div>
+
+    <!-- 页脚 -->
+    <footer
+      class="glass-panel bg-white/20 dark:bg-black/20 shadow-inner py-6"
+    >
+      <div
+        class="container mx-auto px-4 text-center text-neutral-600 dark:text-neutral-400"
+      >
+        <p>© 2026 星月Fox.</p>
+        <div class="mt-3 space-x-4">
+           <a
+            href="https://space.bilibili.com/3493117999188634"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
+          >
+            <i class="fa-brands fa-bilibili"></i>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198761960812/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
+          >
+            <i class="fa-brands fa-steam"></i>
+          </a>
+          <a
+            href="https://github.com/XingYueFox"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="https://t.me/xingyuefox"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
+          >
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+          <a
+            href="mailto:xingyue_fox@outlook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary dark:hover:text-primary-dark transition-colors"
+          >
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let currentChartInstance = null;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const htmlElement = document.documentElement;
+
+        // --- 全局状态管理与初始值加载 ---
+        let isMinimalMode = false;
+        let isBgVisible = localStorage.getItem("bg-visible") !== "false";
+        let isTransparencyEnabled = localStorage.getItem("transparency-enabled") !== "false";
+
+        const bgImage = document.getElementById("main-bg-image");
+        const bgOverlay = document.getElementById("main-bg-overlay");
+        const contentSections = document.querySelectorAll("div.lg\\:col-span-1, div.lg\\:col-span-2 > div");
+
+        // 隐藏的原生兼容性DOM同步引用 (防止底层逻辑异常)
+        const originalMinimalToggle = document.getElementById("settings-minimal-toggle");
+        const originalBgToggle = document.getElementById("settings-bg-toggle");
+        const originalTransparencyToggle = document.getElementById("settings-transparency-toggle");
+
+        // --- 统一全局响应设置状态机函数 ---
+        window.applyMinimalModeUnified = function(enable) {
+          isMinimalMode = enable;
+          const hMinimalToggle = document.getElementById("header-minimal-toggle");
+          if (hMinimalToggle) hMinimalToggle.checked = enable;
+          if (originalMinimalToggle) originalMinimalToggle.checked = enable;
+
+          if (enable) {
+            contentSections.forEach((section) => {
+              section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+              section.style.opacity = "0";
+              section.style.transform = "translateY(20px)";
+              section.style.pointerEvents = "none";
+            });
+            if (bgImage) {
+              bgImage.style.transition = "filter 0.5s ease";
+              bgImage.style.filter = "blur(0px)";
+            }
+          } else {
+            contentSections.forEach((section) => {
+              section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+              section.style.opacity = "1";
+              section.style.transform = "translateY(0)";
+              section.style.pointerEvents = "auto";
+            });
+            if (bgImage) {
+              bgImage.style.transition = "filter 0.5s ease";
+              bgImage.style.filter = isTransparencyEnabled ? "blur(2px)" : "blur(0px)";
+            }
+          }
+        };
+
+        window.applyBgVisibilityUnified = function(visible) {
+          isBgVisible = visible;
+          const hBgToggle = document.getElementById("header-bg-toggle");
+          if (hBgToggle) hBgToggle.checked = visible;
+          if (originalBgToggle) originalBgToggle.checked = visible;
+
+          if (visible) {
+            if (bgImage) bgImage.style.opacity = "1";
+            if (bgOverlay) bgOverlay.style.opacity = "0";
+          } else {
+            if (bgImage) bgImage.style.opacity = "0";
+            if (bgOverlay) bgOverlay.style.opacity = "1";
+          }
+        };
+
+        window.applyTransparencyUnified = function(enable) {
+          isTransparencyEnabled = enable;
+          const hTransparencyToggle = document.getElementById("header-transparency-toggle");
+          if (hTransparencyToggle) hTransparencyToggle.checked = enable;
+          if (originalTransparencyToggle) originalTransparencyToggle.checked = enable;
+
+          if (enable) {
+            htmlElement.classList.remove("no-transparency");
+          } else {
+            htmlElement.classList.add("no-transparency");
+          }
+          if (!isMinimalMode && bgImage) {
+            bgImage.style.filter = enable ? "blur(2px)" : "blur(0px)";
+          }
+        };
+
+        // 一键应用并激活初始值
+        applyMinimalModeUnified(isMinimalMode);
+        applyBgVisibilityUnified(isBgVisible);
+        applyTransparencyUnified(isTransparencyEnabled);
+
+
+        // --- 1. Apple 官网式顶部折叠面板交互 ---
+        const navLogo = document.getElementById("nav-logo");
+        const navLogoArrow = document.getElementById("nav-logo-arrow");
+        const navTest1Btn = document.getElementById("nav-test1-btn");
+        const navTest2Btn = document.getElementById("nav-test2-btn");
+        const navTest3Btn = document.getElementById("nav-test3-btn");
+        const navSearchBtn = document.getElementById("nav-search-btn");
+        const navHamburgerBtn = document.getElementById("nav-hamburger-btn");
+        
+        // 窄屏自适应展开控制按钮
+        const navNarrowCollapseBtn = document.getElementById("nav-narrow-collapse-btn");
+        const narrowArrowIcon = document.getElementById("narrow-arrow-icon");
+        
+        const appleDropdown = document.getElementById("apple-dropdown");
+        const dropdownInner = document.getElementById("dropdown-inner-container");
+        const appleBackdrop = document.getElementById("backdrop-1");
+        const mainNavbar = document.getElementById("main-navbar");
+
+        // 汉堡折叠线
+        const hLine1 = document.getElementById("hamburger-line-1");
+        const hLine2 = document.getElementById("hamburger-line-2");
+        const hLine3 = document.getElementById("hamburger-line-3");
+
+        // 独立的横向下拉内容板块
+        const panelContacts = document.getElementById("panel-contacts");
+        const panelTest1 = document.getElementById("panel-test1");
+        const panelTest2 = document.getElementById("panel-test2");
+        const panelTest3 = document.getElementById("panel-test3");
+        const panelSearch = document.getElementById("panel-search");
+        const panelMenu = document.getElementById("panel-menu");
+        
+        // 窄屏专属收纳板块
+        const panelNarrowBox = document.getElementById("panel-narrow-box");
+
+        // 一级、二级双面板折叠滑动容器关联DOM
+        const menuSlideTrack = document.getElementById("menu-slide-track");
+        const menuSecondaryContainer = document.getElementById("menu-secondary-container");
+
+        // 当前激活状态的主板名称
+        let activePanelType = null;
+        let isHoverLocked = false; 
+
+        // 核心一帧动画重绘计算下一级自适应变化面板高度
+        window.openApplePanel = function(type, forceLock = false) {
+          if (forceLock) {
+            isHoverLocked = true;
+          }
+
+          // 如果在一级菜单下切换，顺便重置菜单面板中的二级滑块回归左侧
+          if (type !== "menu") {
+            resetMenuSlide();
+          }
+
+          // 获取关闭前或切换前面板的瞬时高度，锁定高度作为过渡的起始基准
+          const isDropdownOpen = appleDropdown.offsetHeight > 0;
+          const initialHeight = isDropdownOpen ? appleDropdown.offsetHeight : 0;
+
+          // 开启对应子板块的隐藏态，消除其他项
+          panelContacts.classList.add("hidden");
+          if(panelTest1) panelTest1.classList.add("hidden");
+          if(panelTest2) panelTest2.classList.add("hidden");
+          if(panelTest3) panelTest3.classList.add("hidden");
+          panelSearch.classList.add("hidden");
+          panelMenu.classList.add("hidden");
+          panelNarrowBox.classList.add("hidden"); // 隐藏窄屏收纳组
+
+          // 取消所有横向标签的高亮背景
+          [navLogo, navTest1Btn, navTest2Btn, navTest3Btn, navNarrowCollapseBtn].forEach(el => {
+            if(el) el.classList.remove("bg-black/5", "dark:bg-white/10");
+          });
+
+          if (type === "contacts") {
+            panelContacts.classList.remove("hidden");
+            navLogo.classList.add("bg-black/5", "dark:bg-white/10");
+          } else if (type === "test1") {
+            panelTest1.classList.remove("hidden");
+            if(navTest1Btn) navTest1Btn.classList.add("bg-black/5", "dark:bg-white/10");
+          } else if (type === "test2") {
+            panelTest2.classList.remove("hidden");
+            if(navTest2Btn) navTest2Btn.classList.add("bg-black/5", "dark:bg-white/10");
+          } else if (type === "test3") {
+            panelTest3.classList.remove("hidden");
+            if(navTest3Btn) navTest3Btn.classList.add("bg-black/5", "dark:bg-white/10");
+          } else if (type === "search") {
+            panelSearch.classList.remove("hidden");
+            setTimeout(() => {
+              document.getElementById("smart-search-input").focus();
+            }, 100);
+          } else if (type === "menu") {
+            panelMenu.classList.remove("hidden");
+          } else if (type === "narrow") {
+            panelNarrowBox.classList.remove("hidden");
+            navNarrowCollapseBtn.classList.add("bg-black/5", "dark:bg-white/10");
+          }
+
+          activePanelType = type;
+
+          // 指针箭头转角微动效
+          navLogoArrow.style.transform = (type === "contacts") ? "rotate(180deg)" : "rotate(0deg)";
+          narrowArrowIcon.style.transform = (type === "narrow") ? "rotate(180deg)" : "rotate(0deg)";
+
+          // 核心重绘技术：获取装载不同卡片容器后所需的完美瞬时目标高度
+          appleDropdown.style.height = "auto";
+          const targetHeight = dropdownInner.offsetHeight;
+
+          if (isDropdownOpen) {
+            // 如果面板已开，先强制回滚旧高度，使其避免高度瞬变突兀
+            appleDropdown.style.height = initialHeight + "px";
+            requestAnimationFrame(() => {
+              appleDropdown.style.height = targetHeight + "px";
+            });
+          } else {
+            // 首次展开：从 0px 极速流畅动画开启
+            appleDropdown.style.height = "0px";
+            appleDropdown.offsetHeight; // 强制重绘
+            appleDropdown.style.height = targetHeight + "px";
+          }
+
+          mainNavbar.classList.add("bg-white/95", "dark:bg-neutral-900/95", "shadow-md", "border-neutral-200/50", "dark:border-neutral-800/50");
+          mainNavbar.classList.remove("bg-white/45", "dark:bg-black/45", "border-transparent");
+
+          // 蒙版半透明背景载入
+          appleBackdrop.classList.remove("opacity-0", "pointer-events-none");
+          appleBackdrop.classList.add("opacity-100");
+
+          // 选项菜单按钮变形控制
+          if (type === "menu") {
+            hLine1.style.transform = "rotate(45deg) translate(2.5px, -1px)";
+            hLine2.style.opacity = "0";
+            hLine3.style.transform = "rotate(-45deg) translate(2.5px, 1px)";
+          } else {
+            resetHamburgerIcon();
+          }
+        };
+
+        // 关闭所有下拉面板
+        window.closeApplePanel = function() {
+          activePanelType = null;
+          isHoverLocked = false;
+          
+          appleDropdown.style.height = "0px";
+          
+          navLogoArrow.style.transform = "rotate(0deg)";
+          narrowArrowIcon.style.transform = "rotate(0deg)";
+          [navLogo, navTest1Btn, navTest2Btn, navTest3Btn, navNarrowCollapseBtn].forEach(el => {
+            if(el) el.classList.remove("bg-black/5", "dark:bg-white/10");
+          });
+
+          // 回滚导航栏初始透明度
+          mainNavbar.classList.remove("bg-white/95", "dark:bg-neutral-900/95", "shadow-md", "border-neutral-200/50", "dark:border-neutral-800/50");
+          mainNavbar.classList.add("bg-white/45", "dark:bg-black/45", "border-transparent");
+
+          // 蒙版淡出
+          appleBackdrop.classList.remove("opacity-100");
+          appleBackdrop.classList.add("opacity-0", "pointer-events-none");
+
+          resetHamburgerIcon();
+          resetMenuSlide();
+
+          // 还原空搜条件
+          document.getElementById("smart-search-input").value = "";
+          document.getElementById("search-clear-btn").classList.add("hidden");
+          document.getElementById("search-placeholder-tips").classList.remove("hidden");
+          document.getElementById("search-results-wrapper").classList.add("hidden");
+        };
+
+        function resetHamburgerIcon() {
+          hLine1.style.transform = "none";
+          hLine2.style.opacity = "1";
+          hLine3.style.transform = "none";
+        }
+
+        // 一键横向还原重置二级选项滑块至一级面板
+        function resetMenuSlide() {
+          if (menuSlideTrack) {
+            menuSlideTrack.style.transform = "translateX(0)";
+          }
+        }
+
+        // 统一点击事件响应，具有状态锁定效果
+        navLogo.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (activePanelType === "contacts") closeApplePanel();
+          else openApplePanel("contacts", true);
+        });
+
+        if(navTest1Btn) {
+          navTest1Btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (activePanelType === "test1") closeApplePanel();
+            else openApplePanel("test1", true);
+          });
+        }
+
+        if(navTest2Btn) {
+          navTest2Btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (activePanelType === "test2") closeApplePanel();
+            else openApplePanel("test2", true);
+          });
+        }
+
+        if(navTest3Btn) {
+          navTest3Btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (activePanelType === "test3") closeApplePanel();
+            else openApplePanel("test3", true);
+          });
+        }
+
+        // 窄屏专属下拉收纳按钮触发器
+        navNarrowCollapseBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (activePanelType === "narrow") closeApplePanel();
+          else openApplePanel("narrow", true);
+        });
+
+        navSearchBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (activePanelType === "search") closeApplePanel();
+          else openApplePanel("search", true);
+        });
+
+        navHamburgerBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (activePanelType === "menu") closeApplePanel();
+          else openApplePanel("menu", true);
+        });
+
+        // PC 悬停切换探针控制（防抖延时）
+        let leaveTimeout = null;
+
+        function clearLeaveTimeout() {
+          if (leaveTimeout) {
+            clearTimeout(leaveTimeout);
+            leaveTimeout = null;
+          }
+        }
+
+        const hoverElements = [navLogo, navTest1Btn, navTest2Btn, navTest3Btn, navSearchBtn, navHamburgerBtn, appleDropdown];
+        hoverElements.forEach(el => {
+          if(!el) return;
+          el.addEventListener("mouseenter", () => {
+            if (window.innerWidth < 768) return; 
+            clearLeaveTimeout();
+
+            if (!isHoverLocked) {
+              if (el === navLogo) openApplePanel("contacts");
+              else if (el === navTest1Btn) openApplePanel("test1");
+              else if (el === navTest2Btn) openApplePanel("test2");
+              else if (el === navTest3Btn) openApplePanel("test3");
+              else if (el === navSearchBtn) openApplePanel("search");
+              else if (el === navHamburgerBtn) openApplePanel("menu");
+            }
+          });
+
+          el.addEventListener("mouseleave", () => {
+            if (window.innerWidth < 768) return;
+            if (!isHoverLocked) {
+              clearLeaveTimeout();
+              leaveTimeout = setTimeout(() => {
+                closeApplePanel();
+              }, 400); 
+            }
+          });
+        });
+
+        mainNavbar.addEventListener("mouseleave", () => {
+          if (window.innerWidth < 768) return;
+          if (!isHoverLocked && activePanelType) {
+            clearLeaveTimeout();
+            leaveTimeout = setTimeout(() => {
+              closeApplePanel();
+            }, 400);
+          }
+        });
+
+        mainNavbar.addEventListener("mouseenter", () => {
+          clearLeaveTimeout();
+        });
+
+        appleBackdrop.addEventListener("click", closeApplePanel);
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeApplePanel();
+        });
+
+
+        // --- 2. 双层嵌套二级设置菜单的侧滑交互 ---
+        const menuToSettingsBtn = document.getElementById("menu-to-settings-btn");
+        const menuToAboutBtn = document.getElementById("menu-to-about-btn");
+
+        // 平滑侧滑并加载二级面板内容
+        function enterSecondaryPanel(htmlContent) {
+          menuSecondaryContainer.innerHTML = htmlContent;
+          menuSlideTrack.style.transform = "translateX(-50%)";
+
+          // 变换内容时动态计算子项高度并平滑过渡整个下拉面板的包裹高度
+          setTimeout(() => {
+            appleDropdown.style.height = dropdownInner.offsetHeight + "px";
+          }, 50);
+        }
+
+        // 统一向外层暴露的返回一级菜单函数
+        window.backToMainMenu = function() {
+          resetMenuSlide();
+          // 由二级回到一级时同样优雅过渡高度大小
+          setTimeout(() => {
+            appleDropdown.style.height = dropdownInner.offsetHeight + "px";
+          }, 50);
+        };
+
+        // 加载二级：个性化设置界面 (补回丢失的透明度开关)
+        menuToSettingsBtn.addEventListener("click", () => {
+          const settingsHtml = `
+            <div class="space-y-4">
+              <button onclick="backToMainMenu()" class="flex items-center space-x-1.5 py-1 px-2.5 -ml-1 rounded-lg text-xs font-bold text-primary dark:text-primary-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+                <span>返回菜单</span>
+              </button>
+              
+              <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-1">个性化设置</h4>
+              
+              <div class="space-y-4 bg-transparent text-sm max-w-sm">
+                
+                <!-- 隐藏面板 -->
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-semibold text-neutral-800 dark:text-neutral-100">隐藏主面板</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400">关闭页面上所有面板</div>
+                  </div>
+                  <label class="switch-toggle">
+                    <input type="checkbox" id="header-minimal-toggle" />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <!-- 显示背景 -->
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-semibold text-neutral-800 dark:text-neutral-100">显示背景图</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400">启用或停用主页背景图</div>
+                  </div>
+                  <label class="switch-toggle">
+                    <input type="checkbox" id="header-bg-toggle" checked />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <!-- 透明效果 -->
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-semibold text-neutral-800 dark:text-neutral-100">透明效果</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400">使面板拥有透明效果，如遇卡顿请关闭此项</div>
+                  </div>
+                  <label class="switch-toggle">
+                    <input type="checkbox" id="header-transparency-toggle" checked />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <!-- 深色模式 -->
+                <div class="pt-3">
+                  <div class="font-semibold text-neutral-800 dark:text-neutral-100 mb-2">深色模式选项</div>
+                  <div class="relative grid grid-cols-3 gap-1 bg-neutral-200/50 dark:bg-black/40 p-1 rounded-lg">
+                    <div
+                      id="header-theme-active-indicator"
+                      class="absolute top-1 bottom-1 rounded-md bg-white dark:bg-neutral-800 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
+                    ></div>
+                    <button
+                      id="header-theme-light-btn"
+                      class="relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-700 dark:text-neutral-300 transition-colors"
+                    >
+                      浅色
+                    </button>
+                    <button
+                      id="header-theme-dark-btn"
+                      class="relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-700 dark:text-neutral-300 transition-colors"
+                    >
+                      深色
+                    </button>
+                    <button
+                      id="header-theme-auto-btn"
+                      class="relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-700 dark:text-neutral-300 transition-colors"
+                    >
+                      自动
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          enterSecondaryPanel(settingsHtml);
+          // 激活二级设置事件监听
+          setTimeout(() => {
+            bindSecondarySettingsEvents();
+          }, 50);
+        });
+
+        // 加载二级：关于星月Fox界面
+        menuToAboutBtn.addEventListener("click", () => {
+          const aboutHtml = `
+            <div class="space-y-4">
+              <button onclick="backToMainMenu()" class="flex items-center space-x-1.5 py-1 px-2.5 -ml-1 rounded-lg text-xs font-bold text-primary dark:text-primary-dark hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+                <span>返回菜单</span>
+              </button>
+              
+              <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase">关于此页面</h4>
+              
+              <div class="space-y-4 bg-neutral-200/10 dark:bg-white/5 p-4 rounded-xl border border-neutral-200/30 dark:border-neutral-800/30 max-w-sm text-xs leading-relaxed">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <div class="text-lg font-bold text-neutral-900 dark:text-white">星月Fox的主页</div>
+                    <div class="text-[12px] text-neutral-500 dark:text-neutral-400 mt-0.5">版本: 26.2.5100 | 测试版</div>
+                  </div>
+                  <span class="text-[12px] font-semibold px-2 py-0.5 rounded-full text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10 flex items-center">
+                    最近更新: 2026/08/05
+                  </span>
+                </div>
+
+                <p class="text-[12px] text-neutral-600 dark:text-neutral-300">
+                  此版本加入了全新的顶部导航栏.<br>优化了关闭透明效果选项的可靠性.<br>修复了部分已知问题.<br>优化了在低性能设备上的表现.
+                </p>
+
+                <div class="pt-3 border-t border-neutral-200/30 dark:border-neutral-800/30 flex justify-between items-center text-[12px]">
+                  <span class="text-neutral-400 dark:text-neutral-500">由星月为您呈现 © 2026 星月Fox.</span>
+                  <div class="flex space-x-2.5 text-sm text-neutral-600 dark:text-neutral-400">
+                    <a href="https://space.bilibili.com/3493117999188634" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-bilibili"></i></a>
+                    <a href="https://github.com/XingYueFox" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:xingyue_fox@outlook.com" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          enterSecondaryPanel(aboutHtml);
+        });
+
+        // 绑定二级页面专属的事件响应机制
+        function bindSecondarySettingsEvents() {
+          const hMinimalToggle = document.getElementById("header-minimal-toggle");
+          const hBgToggle = document.getElementById("header-bg-toggle");
+          const hTransparencyToggle = document.getElementById("header-transparency-toggle");
+          
+          const hThemeLightBtn = document.getElementById("header-theme-light-btn");
+          const hThemeDarkBtn = document.getElementById("header-theme-dark-btn");
+          const hThemeAutoBtn = document.getElementById("header-theme-auto-btn");
+          const hThemeIndicator = document.getElementById("header-theme-active-indicator");
+
+          // 初始化二级开关的状态
+          if (hMinimalToggle) hMinimalToggle.checked = isMinimalMode;
+          if (hBgToggle) hBgToggle.checked = isBgVisible;
+          if (hTransparencyToggle) hTransparencyToggle.checked = isTransparencyEnabled;
+
+          function updateHeaderThemeIndicator(mode) {
+            let activeBtn;
+            if (mode === "light") activeBtn = hThemeLightBtn;
+            else if (mode === "dark") activeBtn = hThemeDarkBtn;
+            else activeBtn = hThemeAutoBtn;
+
+            if (activeBtn && hThemeIndicator) {
+              hThemeIndicator.style.left = `${activeBtn.offsetLeft}px`;
+              hThemeIndicator.style.width = `${activeBtn.offsetWidth}px`;
+            }
+          }
+
+          function applyThemeModeUnified(mode) {
+            if (!hThemeLightBtn) return;
+            [hThemeLightBtn, hThemeDarkBtn, hThemeAutoBtn].forEach(btn => {
+              btn.className = "relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-600 dark:text-neutral-400 transition-colors duration-300";
+            });
+
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            let activeBtn;
+
+            if (mode === "light") {
+              htmlElement.classList.remove("dark");
+              localStorage.setItem("theme", "light");
+              activeBtn = hThemeLightBtn;
+            } else if (mode === "dark") {
+              htmlElement.classList.add("dark");
+              localStorage.setItem("theme", "dark");
+              activeBtn = hThemeDarkBtn;
+            } else {
+              if (prefersDark) htmlElement.classList.add("dark");
+              else htmlElement.classList.remove("dark");
+              localStorage.setItem("theme", "auto");
+              activeBtn = hThemeAutoBtn;
+            }
+
+            activeBtn.className = "relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-900 dark:text-white transition-colors duration-300";
+            updateHeaderThemeIndicator(mode);
+
+            if (currentChartInstance) {
+              applyChartTheme(currentChartInstance, htmlElement.classList.contains("dark"));
+            }
+          }
+
+          hThemeLightBtn.addEventListener("click", () => applyThemeModeUnified("light"));
+          hThemeDarkBtn.addEventListener("click", () => applyThemeModeUnified("dark"));
+          hThemeAutoBtn.addEventListener("click", () => applyThemeModeUnified("auto"));
+
+          // 设置初始 Theme
+          const currentMode = localStorage.getItem("theme") || "auto";
+          applyThemeModeUnified(currentMode);
+
+          // 开关变更时的事件挂载与双向数据同步
+          if (hMinimalToggle) {
+            hMinimalToggle.addEventListener("change", (e) => {
+              applyMinimalModeUnified(e.target.checked);
+            });
+          }
+
+          if (hBgToggle) {
+            hBgToggle.addEventListener("change", (e) => {
+              isBgVisible = e.target.checked;
+              localStorage.setItem("bg-visible", isBgVisible ? "true" : "false");
+              applyBgVisibilityUnified(isBgVisible);
+            });
+          }
+
+          if (hTransparencyToggle) {
+            hTransparencyToggle.addEventListener("change", (e) => {
+              isTransparencyEnabled = e.target.checked;
+              localStorage.setItem("transparency-enabled", isTransparencyEnabled ? "true" : "false");
+              applyTransparencyUnified(isTransparencyEnabled);
+            });
+          }
+        }
+
+
+        // --- 3. 搜索面板模糊过滤检索机制 ---
+        const smartSearchInput = document.getElementById("smart-search-input");
+        const searchClearBtn = document.getElementById("search-clear-btn");
+        const searchPlaceholderTips = document.getElementById("search-placeholder-tips");
+        const searchResultsWrapper = document.getElementById("search-results-wrapper");
+        const searchResultsTitle = document.getElementById("search-results-title");
+        const searchResultsList = document.getElementById("search-results-list");
+
+        const searchDatabase = [
+          { name: "游戏：Minecraft (我的世界)", type: "game", targetId: "readme-panel", preview: "最喜欢的游戏？" },
+          { name: "游戏：赛博朋克2077", type: "game", targetId: "readme-panel", preview: "赛博朋克风开放世界，夜之城故事" },
+          { name: "游戏：地平线", type: "game", targetId: "readme-panel", preview: "极限竞速：地平线 探索与赛车" },
+          { name: "游戏：鸣潮", type: "game", targetId: "readme-panel", preview: "开放世界，二次元动作巨作" },
+          { name: "动态：星月在Minecraft中 (Drive)", type: "news", targetId: "news-panel", preview: "点击跳转托管的外置图片包" },
+          { name: "动态：鸣潮精美壁纸资源 (Drive)", type: "news", targetId: "news-panel", preview: "包含剧情CG图，版本活动图及版本动态封面" },
+          { name: "动态：BlueArchive Cafe", type: "news", targetId: "news-panel", preview: "碧蓝档案主题咖啡厅入口" },
+          { name: "联系方式：Outlook 电子邮箱", type: "contact", targetId: "intro-panel", preview: "xingyue_fox@outlook.com" },
+          { name: "联系方式：Gmail 电子邮箱", type: "contact", targetId: "intro-panel", preview: "xingyuefox@gmail.com" },
+          { name: "联系方式：Bilibili 个人空间", type: "contact", targetId: "readme-panel", preview: "3493117999188634" },
+          { name: "联系方式：Github 仓库主页", type: "contact", targetId: "intro-panel", preview: "https://github.com/XingYueFox" },
+          { name: "联系方式：Telegram 电报", type: "contact", targetId: "readme-panel", preview: "https://t.me/xingyuefox" }
+        ];
+
+        smartSearchInput.addEventListener("input", (e) => {
+          const query = e.target.value.trim().toLowerCase();
+          if (query === "") {
+            searchClearBtn.classList.add("hidden");
+            searchPlaceholderTips.classList.remove("hidden");
+            searchResultsWrapper.classList.add("hidden");
+            setTimeout(() => {
+              appleDropdown.style.height = dropdownInner.offsetHeight + "px";
+            }, 50);
+            return;
+          }
+
+          searchClearBtn.classList.remove("hidden");
+          searchPlaceholderTips.classList.add("hidden");
+          searchResultsWrapper.classList.remove("hidden");
+
+          const filtered = searchDatabase.filter(item => 
+            item.name.toLowerCase().includes(query) || 
+            item.preview.toLowerCase().includes(query)
+          );
+
+          searchResultsTitle.textContent = `检索结果 (${filtered.length})`;
+          searchResultsList.innerHTML = "";
+
+          if (filtered.length === 0) {
+            searchResultsList.innerHTML = `
+              <div class="p-3 text-center text-xs text-neutral-500 dark:text-neutral-400">
+                未检索到符合条件的项，换个关键词试试 
+              </div>
+            `;
+          } else {
+            filtered.forEach(item => {
+              const row = document.createElement("button");
+              row.className = "w-full text-left p-2.5 rounded-lg bg-neutral-200/20 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors flex flex-col space-y-0.5";
+              
+              let typeBadge = "";
+              if (item.type === "game") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">游戏库</span>';
+              else if (item.type === "news") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400">动态</span>';
+              else if (item.type === "contact") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400">联系</span>';
+
+              row.innerHTML = `
+                <div class="flex items-center justify-between w-full">
+                  <span class="font-bold text-xs text-neutral-800 dark:text-neutral-100">${item.name}</span>
+                  ${typeBadge}
+                </div>
+                <span class="text-[11px] text-neutral-500 dark:text-neutral-400 font-normal">${item.preview}</span>
+              `;
+
+              row.addEventListener("click", () => {
+                closeApplePanel();
+                const targetEl = document.getElementById(item.targetId);
+                if (targetEl) {
+                  targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                  targetEl.classList.add("ring-2", "ring-primary", "dark:ring-primary-dark");
+                  setTimeout(() => {
+                    targetEl.classList.remove("ring-2", "ring-primary", "dark:ring-primary-dark");
+                  }, 2000);
+                }
+              });
+
+              searchResultsList.appendChild(row);
+            });
+          }
+
+          setTimeout(() => {
+            appleDropdown.style.height = dropdownInner.offsetHeight + "px";
+          }, 50);
+        });
+
+        searchClearBtn.addEventListener("click", () => {
+          smartSearchInput.value = "";
+          smartSearchInput.dispatchEvent(new Event("input"));
+          smartSearchInput.focus();
+        });
+
+        window.triggerQuickSearch = function(keyword) {
+          smartSearchInput.value = keyword;
+          smartSearchInput.dispatchEvent(new Event("input"));
+        };
+
+
+        // --- 4. Chart.js 折线图初始化 ---
+        const ctx = document.getElementById("activityChart");
+        if (ctx) {
+          const isDark = htmlElement.classList.contains("dark");
+
+          currentChartInstance = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: ["前端开发", "学业", "交友", "抗压性", "世界观测", "探究", "创造力", "强迫症", "魔法"],
+              datasets: [
+                {
+                  label: "能力水平",
+                  data: [37, 30, 24, 40, 77, 60, 74, 90, 97],
+                  borderColor: "#2575fc",
+                  backgroundColor: "#61a6fa40",
+                  tension: 0.4,
+                  fill: true,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { mode: "index", intersect: false } },
+              scales: {
+                y: { beginAtZero: true, grid: { color: isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)" }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
+                x: { grid: { display: false }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
+              },
+            },
+          });
+        }
+
+        // --- 5. MD 涟漪效果实现 ---
+        function createRipple(e, target) {
+          const rect = target.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          
+          const x = clientX - rect.left;
+          const y = clientY - rect.top;
+          const size = Math.max(rect.width, rect.height);
+
+          const ripple = document.createElement("span");
+          ripple.className = "md-ripple-effect";
+          ripple.style.width = ripple.style.height = `${size}px`;
+          ripple.style.left = `${x - size / 2}px`;
+          ripple.style.top = `${y - size / 2}px`;
+
+          target.appendChild(ripple);
+
+          ripple.addEventListener("animationend", () => {
+            ripple.remove();
+          });
+        }
+
+        document.body.addEventListener("mousedown", function (e) {
+          const target = e.target.closest(".md-ripple-container");
+          if (target) createRipple(e, target);
+        });
+
+        document.body.addEventListener("touchstart", function (e) {
+          const target = e.target.closest(".md-ripple-container");
+          if (target) createRipple(e, target);
+        }, { passive: true });
+
+      });
+
+      function applyChartTheme(chart, isDark) {
+        const gridColor = isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)" ;
+        const tickColor = isDark ? "#9CA3AF" : "#4B5563";
+        chart.options.scales.y.grid.color = gridColor;
+        chart.options.scales.y.ticks.color = tickColor;
+        chart.options.scales.x.ticks.color = tickColor;
+        chart.update();
+      }
+    </script>
+  </body>
+</html>
+
