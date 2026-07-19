@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>星月Fox的主页</title>
-    
+    <title>星月Fox的收藏库</title>
+
     <!-- 防止深色模式下初始化闪白 -->
     <script>
       (function() {
@@ -55,7 +55,6 @@
     />
     <!-- 引入 CDN FontAwesome 图标，保证本地加载 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script>
       // 应用 Markdown 样式的函数
       function applyMarkdownStyles() {
@@ -140,9 +139,7 @@
                 "bg-neutral-900 dark:bg-neutral-950 text-neutral-100 p-4 rounded-xl overflow-x-auto mb-4 text-sm";
             }
           });
-          // 链接文本颜色
           aElements.forEach((el) => {
-            // 如果是游戏板块内的链接，跳过 Markdown 样式覆写
             if (el.closest('.game-card')) return;
             if (!el.className.includes("text-blue")) {
               el.className =
@@ -150,7 +147,6 @@
             }
           });
           imgElements.forEach((el) => {
-            // 如果是游戏板块内的图片，跳过 Markdown 样式覆写
             if (el.closest('.game-card')) return;
             if (!el.className.includes("max-w-full")) {
               el.className = "max-w-full h-auto rounded-xl my-4 shadow-lg";
@@ -218,7 +214,6 @@
               "secondary-dark": "#60a5fa",
             },
             fontFamily: {
-              // 西文 Fluent UI 字体序列
               sans: ["Segoe UI Variable", "Segoe UI", "Inter", "system-ui", "sans-serif"],
             },
             animation: {
@@ -573,7 +568,7 @@
       class="fixed inset-0 z-40 bg-black/10 dark:bg-black/30 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
     ></div>
 
-    <!-- 顶部导航栏 -->
+    <!-- 顶部导航栏 (完全保留 index.html 顶栏，原汁原味) -->
     <nav
       id="main-navbar"
       class="fixed w-full top-0 z-50 bg-white/45 dark:bg-black/45 backdrop-blur-md transition-all duration-300 border-b border-transparent"
@@ -717,16 +712,15 @@
             </div>
             <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">收藏库</h4>
             <div class="flex flex-col space-y-1 max-w-md">
-              <a href="library.html#games" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
+              <button onclick="closeMenuPanel(); switchTab('game');" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
                 <span>游戏库</span>
-              </a>
-              <a href="library.html#animes" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
+              </button>
+              <button onclick="closeMenuPanel(); switchTab('anime');" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
                 <span>动漫库</span>
-              </a>
-              <a href="library.html#websites" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
+              </button>
+              <button onclick="closeMenuPanel(); switchTab('website');" class="py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors text-sm font-semibold text-neutral-800 dark:text-neutral-200 flex justify-between items-center">
                 <span>网站库</span>
-              </a>
-              
+              </button>
             </div>
           </div>
 
@@ -800,7 +794,6 @@
                   <button onclick="triggerQuickSearch('Minecraft')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Minecraft</button>
                   <button onclick="triggerQuickSearch('鸣潮')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">鸣潮</button>
                   <button onclick="triggerQuickSearch('动态')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">最新动态</button>
-                  <button onclick="triggerQuickSearch('邮箱')" class="text-xs font-semibold px-3 py-2 rounded-lg bg-neutral-200/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">联系邮箱</button>
                 </div>
               </div>
 
@@ -821,6 +814,17 @@
                 <div class="w-1/2 flex-shrink-0 pr-4">
                   <h4 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 tracking-wider uppercase mb-3 px-1">选项菜单</h4>
                   <div class="flex flex-col space-y-1 max-w-sm">
+                    <!--返回选项卡-->
+                    <a 
+                      href="index.html"
+                      class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between text-sm font-semibold text-primary dark:text-primary-dark"
+                    >
+                      <span class="flex items-center"><i class="fa-solid fa-arrow-left w-5 mr-3"></i>返回</span>
+                      <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+
+                    <div class="h-[1px] bg-neutral-200 dark:bg-neutral-800 my-1"></div>
+
                     <button 
                       id="menu-to-settings-btn"
                       class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between text-sm font-semibold text-neutral-800 dark:text-neutral-200"
@@ -851,283 +855,387 @@
       </div>
     </nav>
 
+    <!-- 库展示主面板 -->
     <main class="container mx-auto px-4 pt-24 pb-16 flex-grow">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        
+        <!-- 左侧库导航窗格 -->
         <div class="lg:col-span-1 animate-fade-in">
-          <!-- 左侧主面板 -->
-          <div
-            class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6 "
-          >
-            <div class="flex justify-center mb-6">
-              <img
-                src="img/profile/profile_xingyue_fox.jpg"
-                alt="星月Fox"
-                class="w-36 h-36 rounded-full border-4 border-white dark:border-neutral-700 shadow-lg avatar-glow"
-              />
+          <div class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6">
+            <div class="flex items-center space-x-3 mb-6 border-b border-neutral-200/50 dark:border-neutral-800/50 pb-4">
+              <div class="p-2.5 bg-primary/10 dark:bg-primary-dark/10 rounded-xl text-primary dark:text-primary-dark">
+                <i class="fa-solid fa-boxes-stacked text-xl"></i>
               </div>
-            <div class="text-center mb-6">
-              <h1 class="text-2xl font-bold mb-2">星月Fox</h1>
-              <p class="text-neutral-600 dark:text-neutral-400 mb-4 text-base">
-                未来始于今日，而非昨天
-              </p>
-              <a
-                href="https://github.com/xingyuefox"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="md-ripple-container inline-flex items-center px-4 py-2 rounded-[8px] bg-gradient-custom text-white dark:bg-blue300 font-medium hover:opacity-90 transition-opacity"
-              >
-                <i class="fa-brands fa-github mr-2"></i>
-                <span>访问我的 Github</span>
-              </a>
-            </div>
-            <!-- 主要板块 -->
-            <div class="grid grid-cols-2 gap-4">
-              <div class="md-ripple-container md-ripple-dark bg-neutral-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
-                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
-                  <a href="library.html" target="_blank" class="hover:underline">Library</a>
-                </div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
-                  查看我的收藏库
-                </div>
-              </div>
-              <div class="md-ripple-container md-ripple-dark bg-neutral-100/50 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-4 text-center">
-                <div class="text-2xl font-bold text-primary dark:text-primary-dark mb-1">
-                  <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline">Email</a>
-                </div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
-                  联系我
-                </div>
+              <div>
+                <h1 class="text-xl font-bold">库</h1>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">我的兴趣收藏夹</p>
               </div>
             </div>
-            <div class="mt-6">
-              <h3 class="text-lg font-semibold mb-3">技术栈</h3>
-              <div class="flex flex-wrap gap-2">
-                <!-- 技术标签 -->
-                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10">
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>HTML/CSS
-                </span>
-                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-violet-700 dark:text-violet-300 bg-violet-500/10 border border-violet-500/10">
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>Python
-                </span>
-                <span class="px-3 py-1 rounded-[8px] text-sm flex items-center text-sky-600 dark:text-sky-300 bg-sky-500/10 border border-sky-500/10">
-                  <i class="fa-solid fa-code mr-1 tech-icon"></i>JavaScript
-                </span>
-              </div>
-            </div>
-          </div>
 
-          <div
-            class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6 mt-6 animate-fade-in"
-            style="animation-delay: 0.2s"
-          >
-            <h3 class="text-lg font-semibold mb-3">星月Fox的概览</h3>
-            <div class="h-64">
-              <canvas id="activityChart"></canvas>
+            <!-- 导航切换项 -->
+            <div class="flex flex-col space-y-1.5" id="library-tab-buttons">
+              <button
+                onclick="switchTab('game')"
+                id="sidebar-tab-btn-game"
+                class="sidebar-tab-btn md-ripple-container w-full text-left py-3 px-4 rounded-lg flex items-center space-x-3 text-sm font-semibold text-primary dark:text-primary-dark bg-primary/10 dark:bg-primary-dark/10 transition-all"
+              >
+                <i class="fa-solid fa-gamepad text-base w-5 text-center"></i>
+                <span>游戏</span>
+              </button>
+
+              <button
+                onclick="switchTab('anime')"
+                id="sidebar-tab-btn-anime"
+                class="sidebar-tab-btn md-ripple-container w-full text-left py-3 px-4 rounded-lg flex items-center space-x-3 text-sm font-semibold text-primary dark:text-primary-dark bg-primary/10 dark:bg-primary-dark/10 transition-all"
+              >
+                <i class="fa-solid fa-clapperboard text-base w-5 text-center"></i>
+                <span>动漫</span>
+              </button>
+
+              <button
+                onclick="switchTab('website')"
+                id="sidebar-tab-btn-website"
+                class="sidebar-tab-btn md-ripple-container w-full text-left py-3 px-4 rounded-lg flex items-center space-x-3 text-sm font-semibold text-primary dark:text-primary-dark bg-primary/10 dark:bg-primary-dark/10 transition-all"
+              >
+                <i class="fa-solid fa-globe text-base w-5 text-center"></i>
+                <span>网站</span>
+              </button>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-neutral-200/50 dark:border-neutral-800/50">
+              <a 
+                href="index.html"
+                class="md-ripple-container w-full py-2.5 px-4 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-center text-xs font-bold space-x-2"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回个人主页</span>
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-2 flex flex-col gap-6">
-          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="intro-panel" style="animation-delay: 0.1s">
-            <h2 class="text-2xl font-bold mb-4 flex items-center">
-              星月Fox是谁？
-            </h2>
-            <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
-              海内存知己，天涯若比邻。你好👋很高兴能在这里见到，我是星月Fox，17岁高中生。
-            </p>
-            <p class="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
-              技术极客，对于UI设计/前端感兴趣。擅长Windows系统的各种乱玩（
-            </p>
-          </div>
-
-          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="readme-panel" style="animation-delay: 0.3s">
-            <div class="max-w-none text-base leading-relaxed" id="readme-content">
-              <h3 class="text-2xl font-bold mt-2 mb-3 text-neutral-900 dark:text-white" id="recently">🥰很高兴认识你</h3>
-              <p class="mb-2 text-neutral-700 dark:text-neutral-300">交换友链？</p>
-              <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-                <span>向我</span>
-                <a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline font-semibold">发送邮件✉️</a>，
-                <span>或者使用其他联系方式？请见页尾</span>
-              </p>
+        <!-- 右侧显示当前选项卡内容 -->
+        <div class="lg:col-span-3 flex flex-col min-h-[580px] justify-start">
+          
+          <!-- ================= 游戏标签页 (高度优化为 h-44 黄金尺寸) ================= -->
+          <div class="library-tab-content transition-all duration-300 animate-fade-in" id="tab-content-game">
+            <div class="glass-panel rounded-xl p-6">
+              <h2 class="text-2xl font-bold mb-2 flex items-center">
+                <i class="fa-solid fa-gamepad text-primary dark:text-primary-dark mr-2.5"></i>
+                <span>游戏库</span>
+              </h2>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6">这里是我平时喜欢/最爱玩的游戏。</p>
               
-              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">📖我的项目</h3>
-              <p class="text-neutral-700 dark:text-neutral-300">我的个人主页：当前网页</p>
-              <p class="text-neutral-700 dark:text-neutral-300 mt-1">
-                <span>目前正在使用</span>
-                <a href="https://fluent2.microsoft.design/" target="_blank" class="hover:underline">Fluent 2 Design设计规范</a>
-                <span>改进此页面</span>
-              </p>
-
-              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">🎮游戏标签</h3>
-              <p class="mb-2 text-neutral-700 dark:text-neutral-300"></p>
-              
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 <!-- Minecraft 卡片 -->
-                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-400/10">
-                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
                     <img src="img/games/minecraft_bg.jpg" alt="Minecraft" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
                   </div>
                   <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-black/40 to-transparent pointer-events-none"></div>
-                  <a href="https://Minecraft.net" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                  <a href="https://Minecraft.net" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
                     <div class="flex items-center space-x-2">
-                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
                         <img src="img/icon/minecraft_logo.jpg" alt="Minecraft Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
                       </span>
-                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">Minecraft</span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">Minecraft</span>
                     </div>
                   </a>
                 </div>
 
                 <!-- 赛博朋克2077 卡片 -->
-                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-500/40 dark:hover:shadow-yellow-400/10">
-                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-500/40 dark:hover:shadow-yellow-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
                     <img src="img/games/cyberpunk_2077_bg.jpg" alt="赛博朋克2077" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
                   </div>
                   <div class="absolute inset-0 bg-gradient-to-t from-yellow-950/90 via-black/40 to-transparent pointer-events-none"></div>
-                  <a href="https://www.cyberpunk.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                  <a href="https://www.cyberpunk.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
                     <div class="flex items-center space-x-2">
-                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
                         <img src="img/icon/cyberpunk_2077_icon.jpg" alt="赛博朋克2077 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
                       </span>
-                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">赛博朋克2077</span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">赛博朋克2077</span>
                     </div>
                   </a>
                 </div>
 
                 <!-- 地平线 卡片 -->
-                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/40 dark:hover:shadow-pink-700/20">
-                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/40 dark:hover:shadow-pink-700/20">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
                     <img src="img/games/forza_horizon_6_bg.jpg" alt="地平线" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
                   </div>
                   <div class="absolute inset-0 bg-gradient-to-t from-pink-950/90 via-black/40 to-transparent pointer-events-none"></div>
-                  <a href="https://forza.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                  <a href="https://forza.net/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
                     <div class="flex items-center space-x-2">
-                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
                         <img src="img/icon/forza_horizon_6_logo.jpg" alt="地平线 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
                       </span>
-                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">地平线</span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">地平线</span>
                     </div>
                   </a>
                 </div>
 
                 <!-- 鸣潮 卡片 -->
-                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-32 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40 dark:hover:shadow-sky-400/10">
-                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40 dark:hover:shadow-sky-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
                     <img src="img/games/wuthering_waves_bg.jpg" alt="鸣潮" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
                   </div>
                   <div class="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-black/40 to-transparent pointer-events-none"></div>
-                  <a href="https://mc.kurogames.com" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-3 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                  <a href="https://mc.kurogames.com" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
                     <div class="flex items-center space-x-2">
-                      <span class="inline-flex items-center justify-center w-5 h-5 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
                         <img src="img/icon/wuthering_waves_logo.jpg" alt="鸣潮 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
                       </span>
-                      <span class="font-bold text-sm tracking-wide text-white drop-shadow-md">鸣潮</span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">鸣潮</span>
                     </div>
                   </a>
                 </div>
-              </div>
 
-              <h3 class="text-2xl font-bold mt-8 mb-3 text-neutral-900 dark:text-white">🌐在互联网上找到我</h3>
-              <ul class="list-disc list-inside space-y-2 font-semibold">
-                <li><a href="https://space.bilibili.com/3493117999188634" target="_blank" class="hover:underline">Bilibili</a></li>
-                <li><a href="https://github.com/XingYueFox" target="_blank" class="hover:underline">Github</a></li>
-                <li><a href="https://namemc.com/XingYue_Fox" target="_blank" class="hover:underline">NameMC</a></li>
-                <li><a href="https://t.me/xingyuefox" target="_blank" class="hover:underline">Telegram</a></li>
-                <li><a href="mailto:xingyue_fox@outlook.com" target="_blank" class="hover:underline">联系我的邮箱></a></li>
-              </ul>
+                <!-- 蔚蓝档案 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40 dark:hover:shadow-sky-500/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
+                    <img src="img/games/blue_archive_bg.jpg" alt="蔚蓝档案" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://bluearchive.jp/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/blue_archive_icon.jpg" alt="蔚蓝档案 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">蔚蓝档案</span>
+                    </div>
+                  </a>
+                </div>
 
-              <h3 class="text-2xl font-bold mt-8 mb-2 text-neutral-900 dark:text-white">🚧维护概览</h3>
-              <p class="text-neutral-600 dark:text-neutral-400">最后维护于 2026/07/20</p>
-              <p class="text-neutral-600 dark:text-neutral-400 mt-0.5">[8月更新预览]此次更新修复了已知问题</p>
-            </div>
-          </div>
-
-          <div class="glass-panel rounded-xl p-6 animate-fade-in" id="news-panel" style="animation-delay: 0.5s">
-            <h2 class="text-2xl font-bold mb-4 flex items-center">
-              <i class="fa-solid fa-code text-primary dark:text-primary-dark mr-2"></i>
-              <span>动态</span>
-            </h2>
-            <div class="space-y-4">
-              <a
-                href="https://drive.google.com/drive/folders/15v32ha1JSSh7SUVVIhJyqWlZYyvI0mOw"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
-              >
-                <div class="flex justify-between items-start mb-2">
-                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">星月在Minecraft中</h3>
-                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
-                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>3分钟</span>
-                  </span>
+                <!-- 千恋＊万花 卡片 -->
+                <div class="game-card md-ripple-container md-ripple-dark relative group overflow-hidden rounded-xl h-44 w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-green-500/40 dark:hover:shadow-green-400/10">
+                  <div class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800 pointer-events-none">
+                    <img src="img/games/senren_banka_bg.jpg" alt="千恋＊万花" class="absolute w-full h-full object-cover m-0 p-0 block transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none';">
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-green-950/90 via-black/40 to-transparent pointer-events-none"></div>
+                  <a href="https://senren.nekonyansoft.com/" target="_blank" class="absolute left-0 right-0 bottom-0 top-0 p-4 flex flex-col justify-end text-white hover:text-white hover:no-underline z-10">
+                    <div class="flex items-center space-x-2">
+                      <span class="inline-flex items-center justify-center w-6 h-6 overflow-hidden rounded-md flex-shrink-0 bg-black/30">
+                        <img src="img/icon/senren_banka_icon.jpg" alt="千恋＊万花 Icon" class="w-full h-full object-cover m-0 p-0 block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><path d=\'M3 3h18v18H3z\'/></svg>'">
+                      </span>
+                      <span class="font-bold text-base tracking-wide text-white drop-shadow-md">千恋＊万花</span>
+                    </div>
+                  </a>
                 </div>
-                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">网页内嵌式图片正在完善，目前此链接是一个由Google托管的页面</p>
-                <div class="flex justify-between items-center text-xs text-neutral-400">
-                  <span>Google Drive</span><span>2026-06-27</span>
-                </div>
-              </a>
-
-              <a
-                href="https://drive.google.com/drive/folders/1GwBykGeMJ3pF_mcbdA9TX9RgzC_3dyzQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
-              >
-                <div class="flex justify-between items-start mb-2">
-                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">鸣潮壁纸（含动态）</h3>
-                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
-                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>15分钟</span>
-                  </span>
-                </div>
-                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">由X用户@KiriyumeBun提供文件，包含剧情CG图，版本活动图及版本动态视频封面</p>
-                <div class="flex justify-between items-center text-xs text-neutral-400">
-                  <span>Google Drive</span><span>2026-07-10</span>
-                </div>
-              </a>
-           
-              <a
-                href="https://bluearchive.cafe"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="md-ripple-container md-ripple-dark block p-4 bg-neutral-50/70 dark:bg-black/30 border border-black/5 dark:border-white/5 rounded-xl repo-item hover:bg-neutral-100/40 dark:hover:bg-black/10"
-              >
-                <div class="flex justify-between items-start mb-2">
-                  <h3 class="text-lg font-semibold text-primary dark:text-primary-dark">？这是啥来着</h3>
-                  <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center">
-                    <i class="fa-solid fa-columns mr-1 opacity-70"></i><span>阅读时间未知</span>
-                  </span>
-                </div>
-                <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-2">先放个咖啡厅（</p>
-                <div class="flex justify-between items-center text-xs text-neutral-400">
-                  <span>BlueArchive Cafe</span><span>2026-06-24</span>
-                </div>
-              </a>
 
               </div>
             </div>
           </div>
+
+          <!-- ================= 动漫标签页 (施工中) ================= -->
+          <div class="library-tab-content transition-all duration-300 animate-fade-in hidden" id="tab-content-anime">
+            <div class="glass-panel rounded-xl p-6 text-center py-24 flex flex-col justify-center items-center h-full min-h-[460px]">
+              <div class="w-20 h-20 bg-neutral-200/50 dark:bg-neutral-800/50 rounded-full flex items-center justify-center mb-5 animate-bounce">
+                <i class="fa-solid fa-screwdriver-wrench text-3xl text-neutral-400 dark:text-neutral-500"></i>
+              </div>
+              <h2 class="text-xl font-bold mb-2">动漫库正在施工中...</h2>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm mx-auto">
+                
+              </p>
+            </div>
+          </div>
+
+          <!-- ================= 网站标签页 (四大分类卡片展示，已全部添加选中浮动动画与无彩色常规阴影) ================= -->
+          <div class="library-tab-content transition-all duration-300 animate-fade-in hidden" id="tab-content-website">
+            <div class="glass-panel rounded-xl p-6">
+              <h2 class="text-2xl font-bold mb-2 flex items-center">
+                <i class="fa-solid fa-globe text-primary dark:text-primary-dark mr-2.5"></i>
+                <span>网站库</span>
+              </h2>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-8">在这里记录我在学习、创作、摸鱼时收藏的高质量网站资源。</p>
+
+              <!-- 分类容器 -->
+              <div class="space-y-8">
+                
+                <!-- 1 -->
+                <div>
+                  <h3 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 border-l-4 border-blue-500 pl-2 mb-4 uppercase tracking-wider">
+                    网站与开发
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a 
+                      href="https://github.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-neutral-800 dark:bg-neutral-900 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-github text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">GitHub</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">全球领先的软件开发及开源代码托管平台。</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://cloudflare.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-orange-500 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-cloudflare"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Cloudflare</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">全球领先的 CDN 和 Web 安全服务提供商。</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- 2 -->
+                <div>
+                  <h3 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 border-l-4 border-emerald-500 pl-2 mb-4 uppercase tracking-wider">
+                    AI工具
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a 
+                      href="https://chat.openai.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-emerald-500 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-openai"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">ChatGPT</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">强大的 AI 对话模型，支持多语言交互。</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://claude.ai" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-orange-400 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-claude"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Claude</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">由 Anthropic 开发的 AI 助手，专注于安全和有益的对话。</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <!-- 3 -->
+                <div>
+                  <h3 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 border-l-4 border-pink-400 pl-2 mb-4 uppercase tracking-wider">
+                    娱乐
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a 
+                      href="https://space.bilibili.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-pink-400 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-bilibili text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Bilibili 哔哩哔哩</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">知名的弹幕视频网站。</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://douyin.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-black text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-tiktok"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">抖音</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">是字节跳动旗下的短视频分享平台。</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://store.steampowered.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-slate-900 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-steam text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Steam</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">全球最大的综合性数字发行平台之一</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://www.xbox.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-green-700 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-brands fa-xbox text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Xbox</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">微软开发的跨平台游戏与娱乐应用程序及游戏平台</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- 4 -->
+                <div>
+                  <h3 class="text-xs font-bold text-neutral-400 dark:text-neutral-500 border-l-4 border-purple-500 pl-2 mb-4 uppercase tracking-wider">
+                    百宝箱
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a 
+                      href="https://littleskin.com" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-yellow-900 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-solid fa-cube text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">Littleskin</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">一个为 Minecraft 玩家提供皮肤定制服务的平台。</p>
+                      </div>
+                    </a>
+
+                    <a 
+                      href="https://tools.athbe.cn/ncm/" 
+                      target="_blank" 
+                      class="md-ripple-container p-4 bg-neutral-100/50 dark:bg-black/30 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40 rounded-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex items-start space-x-3 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <span class="p-2.5 bg-blue-400 text-white rounded-lg flex-shrink-0">
+                        <i class="fa-regular fa-snowflake text-lg"></i>
+                      </span>
+                      <div>
+                        <h4 class="font-bold text-sm text-neutral-950 dark:text-white">NCM解密工具</h4>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">用于解密网易云音乐加密音频文件的工具。</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
 
-    <!-- 原有设置/关于弹窗兼容所需的基础隐藏结构，防外部JS意外引用 -->
-    <div id="settings-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden">
-      <input type="checkbox" id="settings-minimal-toggle" />
-      <input type="checkbox" id="settings-bg-toggle" checked />
-      <input type="checkbox" id="settings-transparency-toggle" checked />
-      <button id="theme-light-btn"></button>
-      <button id="theme-dark-btn"></button>
-      <button id="theme-auto-btn"></button>
-      <div id="theme-active-indicator"></div>
-      <button id="close-settings-btn"></button>
-      <div id="settings-modal-overlay"></div>
-      <div id="settings-modal-content"></div>
-    </div>
-    <div id="about-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="close-about-btn"></button><div id="about-modal-overlay"></div><div id="about-modal-content"></div></div>
-    <div id="options-menu" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="settings-modal-btn"></button><button id="about-btn"></button></div>
-
     <!-- 页脚 -->
     <footer
-      class="glass-panel bg-white/20 dark:bg-black/20 shadow-inner py-6"
+      class="fixed bottom-0 left-0 right-0 z-50 glass-panel bg-white/20 dark:bg-black/20 shadow-inner py-6"
     >
       <div
         class="container mx-auto px-4 text-center text-neutral-600 dark:text-neutral-400"
@@ -1178,9 +1286,23 @@
       </div>
     </footer>
 
-    <script>
-      let currentChartInstance = null;
+    <!-- 原有设置/关于弹窗兼容所需的基础隐藏结构，防外部JS意外引用 -->
+    <div id="settings-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden">
+      <input type="checkbox" id="settings-minimal-toggle" />
+      <input type="checkbox" id="settings-bg-toggle" checked />
+      <input type="checkbox" id="settings-transparency-toggle" checked />
+      <button id="theme-light-btn"></button>
+      <button id="theme-dark-btn"></button>
+      <button id="theme-auto-btn"></button>
+      <div id="theme-active-indicator"></div>
+      <button id="close-settings-btn"></button>
+      <div id="settings-modal-overlay"></div>
+      <div id="settings-modal-content"></div>
+    </div>
+    <div id="about-modal" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="close-about-btn"></button><div id="about-modal-overlay"></div><div id="about-modal-content"></div></div>
+    <div id="options-menu" class="hidden pointer-events-none absolute w-0 h-0 opacity-0 overflow-hidden"><button id="settings-modal-btn"></button><button id="about-btn"></button></div>
 
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         const htmlElement = document.documentElement;
 
@@ -1191,7 +1313,7 @@
 
         const bgImage = document.getElementById("main-bg-image");
         const bgOverlay = document.getElementById("main-bg-overlay");
-        const contentSections = document.querySelectorAll("div.lg\\:col-span-1, div.lg\\:col-span-2 > div");
+        const contentSections = document.querySelectorAll("main .grid > div");
 
         // 隐藏的原生兼容性DOM同步引用 (防止底层逻辑异常)
         const originalMinimalToggle = document.getElementById("settings-minimal-toggle");
@@ -1267,7 +1389,68 @@
         applyTransparencyUnified(isTransparencyEnabled);
 
 
-        // --- 1.顶部折叠面板交互 ---
+        // --- 1. 选项卡切换交互 ---
+        window.switchTab = function(tabId) {
+          // 获取所有相关DOM
+          const tabButtons = document.querySelectorAll(".sidebar-tab-btn");
+          const tabContents = document.querySelectorAll(".library-tab-content");
+
+          // 重置样式与可见度
+          tabButtons.forEach(btn => {
+            btn.classList.remove(
+              "text-primary", "dark:text-primary-dark", 
+              "bg-primary/10", "dark:bg-primary-dark/10", 
+              "border-primary", "dark:border-primary-dark"
+            );
+            btn.classList.add(
+              "text-neutral-700", "dark:text-neutral-300", 
+              "hover:bg-black/5", "dark:hover:bg-white/5", 
+              "border-transparent"
+            );
+          });
+
+          tabContents.forEach(content => {
+            content.classList.add("hidden");
+          });
+
+          // 激活对应的选项
+          const activeBtn = document.getElementById(`sidebar-tab-btn-${tabId}`);
+          const activeContent = document.getElementById(`tab-content-${tabId}`);
+
+          if (activeBtn && activeContent) {
+            activeBtn.classList.remove(
+              "text-neutral-700", "dark:text-neutral-300", 
+              "hover:bg-black/5", "dark:hover:bg-white/5", 
+              "border-transparent"
+            );
+            activeBtn.classList.add(
+              "text-primary", "dark:text-primary-dark", 
+              "bg-primary/10", "dark:bg-primary-dark/10", 
+              "border-primary", "dark:border-primary-dark"
+            );
+            activeContent.classList.remove("hidden");
+          }
+        };
+
+        // --- 新增：URL Hash 自动导航检测逻辑 ---
+        function checkUrlHashAndNavigate() {
+          const hash = window.location.hash.toLowerCase();
+          if (hash === "#game" || hash === "#games") {
+            switchTab("game");
+          } else if (hash === "#anime" || hash === "#animes") {
+            switchTab("anime");
+          } else if (hash === "#website" || hash === "#websites") {
+            switchTab("website");
+          }
+        }
+
+        // 页面初始化时执行一次
+        checkUrlHashAndNavigate();
+        // 监听 URL Hash 的变化（以便即时切换）
+        window.addEventListener("hashchange", checkUrlHashAndNavigate);
+
+
+        // --- 2. 顶部折叠面板交互 ---
         const navLogo = document.getElementById("nav-logo");
         const navLogoArrow = document.getElementById("nav-logo-arrow");
         const navTest1Btn = document.getElementById("nav-test1-btn");
@@ -1553,7 +1736,7 @@
         });
 
 
-        // --- 2. 嵌套二级设置菜单的侧滑交互 ---
+        // --- 3. 嵌套二级设置菜单的侧滑交互 ---
         const menuToSettingsBtn = document.getElementById("menu-to-settings-btn");
         const menuToAboutBtn = document.getElementById("menu-to-about-btn");
 
@@ -1679,7 +1862,7 @@
               <div class="space-y-4 bg-neutral-200/10 dark:bg-white/5 p-4 rounded-xl border border-neutral-200/30 dark:border-neutral-800/30 max-w-sm text-xs leading-relaxed">
                 <div class="flex items-start justify-between">
                   <div>
-                    <div class="text-lg font-bold text-neutral-900 dark:text-white">星月Fox的主页</div>
+                    <div class="text-lg font-bold text-neutral-900 dark:text-white">星月Fox的收藏库</div>
                     <div class="text-[12px] text-neutral-500 dark:text-neutral-400 mt-0.5">版本: 26.2.6000 | 测试版</div>
                   </div>
                   <span class="text-[12px] font-semibold px-2 py-0.5 rounded-full text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10 flex items-center">
@@ -1760,10 +1943,6 @@
 
             activeBtn.className = "relative z-10 py-1 px-1.5 rounded-md text-[11px] font-semibold text-neutral-900 dark:text-white transition-colors duration-300";
             updateHeaderThemeIndicator(mode);
-
-            if (currentChartInstance) {
-              applyChartTheme(currentChartInstance, htmlElement.classList.contains("dark"));
-            }
           }
 
           hThemeLightBtn.addEventListener("click", () => applyThemeModeUnified("light"));
@@ -1799,7 +1978,7 @@
         }
 
 
-        // --- 3. 搜索面板模糊过滤检索机制 ---
+        // --- 4. 搜索面板模糊过滤检索机制 ---
         const smartSearchInput = document.getElementById("smart-search-input");
         const searchClearBtn = document.getElementById("search-clear-btn");
         const searchPlaceholderTips = document.getElementById("search-placeholder-tips");
@@ -1808,19 +1987,28 @@
         const searchResultsList = document.getElementById("search-results-list");
 
         const searchDatabase = [
-          { name: "游戏：Minecraft (我的世界)", type: "game", targetId: "readme-panel", preview: "最喜欢的游戏？" },
-          { name: "游戏：赛博朋克2077", type: "game", targetId: "readme-panel", preview: "赛博朋克风开放世界，夜之城的故事" },
-          { name: "游戏：地平线", type: "game", targetId: "readme-panel", preview: "极限竞速：地平线 探索与赛车" },
-          { name: "游戏：鸣潮", type: "game", targetId: "readme-panel", preview: "开放世界，二次元动作巨作" },
-          { name: "动态：星月在Minecraft中 (Drive)", type: "news", targetId: "news-panel", preview: "点击跳转托管的外置图片包" },
-          { name: "动态：鸣潮精美壁纸资源 (Drive)", type: "news", targetId: "news-panel", preview: "包含剧情CG图，版本活动图及版本动态封面" },
-          { name: "动态：BlueArchive Cafe", type: "news", targetId: "news-panel", preview: "碧蓝档案主题咖啡厅入口" },
+          { name: "游戏：Minecraft (我的世界)", type: "game", tab: "game", preview: "最喜欢的游戏？" },
+          { name: "游戏：赛博朋克2077", type: "game", tab: "game", preview: "赛博朋克风开放世界，夜之城故事" },
+          { name: "游戏：地平线", type: "game", tab: "game", preview: "极限竞速：地平线 探索与赛车" },
+          { name: "游戏：鸣潮", type: "game", tab: "game", preview: "开放世界，二次元动作巨作" },
+          { name: "游戏：蔚蓝档案", type: "game", tab: "game", preview: "青春、科技与奇迹的RPG。" },
+          { name: "游戏：千恋＊万花", type: "game", tab: "game", preview: "柚子社经典美少女恋爱视觉小说。" },
           { name: "联系方式：Outlook 电子邮箱", type: "contact", targetId: "intro-panel", preview: "xingyue_fox@outlook.com" },
           { name: "联系方式：Gmail 电子邮箱", type: "contact", targetId: "intro-panel", preview: "xingyuefox@gmail.com" },
           { name: "联系方式：Bilibili 个人空间", type: "contact", targetId: "readme-panel", preview: "3493117999188634" },
           { name: "联系方式：Steam 玩家资料", type: "contact", targetId: "readme-panel", preview: "https://steamcommunity.com/profiles/76561198761960812/" },
           { name: "联系方式：Github 仓库主页", type: "contact", targetId: "intro-panel", preview: "https://github.com/XingYueFox" },
-          { name: "联系方式：Telegram 电报", type: "contact", targetId: "readme-panel", preview: "https://t.me/xingyuefox" }
+          { name: "联系方式：Telegram 电报", type: "contact", targetId: "readme-panel", preview: "https://t.me/xingyuefox" },
+          { name: "网站：GitHub", type: "web", tab: "website", preview: "全球领先的开源代码托管平台。" },
+          { name: "网站：Cloudflare", type: "web", tab: "website", preview: "全球领先的 CDN 和 Web 安全服务提供商。" },
+          { name: "网站：ChatGPT", type: "web", tab: "website", preview: "强大的 AI 对话模型，支持多语言交互。" },
+          { name: "网站：Claude", type: "web", tab: "website", preview: "由 Anthropic 开发的 AI 助手。" },
+          { name: "网站：Bilibili 哔哩哔哩", type: "web", tab: "website", preview: "知名的弹幕视频网站。" },
+          { name: "网站：抖音", type: "web", tab: "website", preview: "是字节跳动旗下的短视频分享平台。" },
+          { name: "网站：Steam", type: "web", tab: "website", preview: "全球最大的综合性数字发行平台之一。" },
+          { name: "网站：Xbox", type: "web", tab: "website", preview: "微软开发的跨平台游戏与娱乐应用程序。" },
+          { name: "网站：Littleskin", type: "web", tab: "website", preview: "一个为 Minecraft 玩家提供皮肤定制服务的平台。" },
+          { name: "网站：NCM解密工具", type: "web", tab: "website", preview: "用于解密网易云音乐加密音频文件的工具。" },
         ];
 
         smartSearchInput.addEventListener("input", (e) => {
@@ -1860,8 +2048,7 @@
               
               let typeBadge = "";
               if (item.type === "game") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">游戏库</span>';
-              else if (item.type === "news") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400">动态</span>';
-              else if (item.type === "contact") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400">联系</span>';
+              else if (item.type === "web") typeBadge = '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400">网站库</span>';
 
               row.innerHTML = `
                 <div class="flex items-center justify-between w-full">
@@ -1873,14 +2060,7 @@
 
               row.addEventListener("click", () => {
                 closeMenuPanel();
-                const targetEl = document.getElementById(item.targetId);
-                if (targetEl) {
-                  targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
-                  targetEl.classList.add("ring-2", "ring-primary", "dark:ring-primary-dark");
-                  setTimeout(() => {
-                    targetEl.classList.remove("ring-2", "ring-primary", "dark:ring-primary-dark");
-                  }, 2000);
-                }
+                switchTab(item.tab);
               });
 
               searchResultsList.appendChild(row);
@@ -1903,38 +2083,6 @@
           smartSearchInput.dispatchEvent(new Event("input"));
         };
 
-
-        // --- 4. Chart.js 折线图初始化 ---
-        const ctx = document.getElementById("activityChart");
-        if (ctx) {
-          const isDark = htmlElement.classList.contains("dark");
-
-          currentChartInstance = new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: ["前端开发", "学业", "交友", "抗压性", "世界观测", "探究", "创造力", "强迫症", "魔法"],
-              datasets: [
-                {
-                  label: "能力水平",
-                  data: [37, 30, 24, 40, 77, 60, 74, 90, 97],
-                  borderColor: "#2575fc",
-                  backgroundColor: "#61a6fa40",
-                  tension: 0.4,
-                  fill: true,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: { legend: { display: false }, tooltip: { mode: "index", intersect: false } },
-              scales: {
-                y: { beginAtZero: true, grid: { color: isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)" }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
-                x: { grid: { display: false }, ticks: { color: isDark ? "#9CA3AF" : "#4B5563", font: { size: 12 } } },
-              },
-            },
-          });
-        }
 
         // --- 5. MD 涟漪效果实现 ---
         function createRipple(e, target) {
@@ -1970,16 +2118,6 @@
         }, { passive: true });
 
       });
-
-      function applyChartTheme(chart, isDark) {
-        const gridColor = isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.06)" ;
-        const tickColor = isDark ? "#9CA3AF" : "#4B5563";
-        chart.options.scales.y.grid.color = gridColor;
-        chart.options.scales.y.ticks.color = tickColor;
-        chart.options.scales.x.ticks.color = tickColor;
-        chart.update();
-      }
     </script>
   </body>
 </html>
-
