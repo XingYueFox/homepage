@@ -388,7 +388,7 @@
 
       .dark .bg-overlay {
         background-color: #171717d6;
-        opacity: 0.65; /* 加载背景时底色 */
+        opacity: 0.65; /* 无背景时底色 */
       }
 
       .avatar-glow {
@@ -867,7 +867,7 @@
               </div>
             <div class="text-center mb-6">
               <h1 class="text-2xl font-bold mb-2">星月Fox</h1>
-              <p class="text-neutral-600 dark:text-neutral-400 mb-4 text-base">
+              <p id="user-signature" class="text-neutral-600 dark:text-neutral-400 mb-4 text-base">
                 该吃午饭啦 (,,>᎑<,,)
               </p>
               <a
@@ -916,6 +916,7 @@
             </div>
           </div>
 
+          
           <div
             class="glass-panel bg-white/30 dark:bg-black/40 rounded-xl shadow-xl p-6 mt-6 animate-fade-in"
             style="animation-delay: 0.2s"
@@ -1183,6 +1184,24 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         const htmlElement = document.documentElement;
+
+        // 实现随机加载签名
+        const signatures = [
+          "该吃午饭啦 (,,>᎑<,,)",
+          "密码下周就能想起来",
+          "我们在下个时代再会",
+          "我想留在大家身边，从过去一同迈向明天",
+          "有问题吗？请提交你的issue或PR！",
+          "张雪峰老师，我还记得你~",
+          "愿世界在你眼前展开！",
+          "对党忠诚，服务人民",
+        ];
+
+        const signatureEl = document.getElementById("user-signature");
+        if (signatureEl) {
+          const randomIndex = Math.floor(Math.random() * signatures.length);
+          signatureEl.textContent = signatures[randomIndex];
+        }
 
         // --- 全局状态管理与初始值加载 ---
         let isMinimalMode = false;
@@ -1680,7 +1699,7 @@
                 <div class="flex items-start justify-between">
                   <div>
                     <div class="text-lg font-bold text-neutral-900 dark:text-white">星月Fox的主页</div>
-                    <div class="text-[12px] text-neutral-500 dark:text-neutral-400 mt-0.5">版本: 26.2.6000 | 测试版</div>
+                    <div class="text-[12px] text-neutral-500 dark:text-neutral-400 mt-0.5">版本: 26.2.6100 | 测试版</div>
                   </div>
                   <span class="text-[12px] font-semibold px-2 py-0.5 rounded-full text-blue-800 dark:text-blue-300 bg-blue-500/10 border border-blue-500/10 flex items-center">
                     最近更新: 2026/07/20
@@ -1688,7 +1707,7 @@
                 </div>
 
                 <p class="text-[12px] text-neutral-600 dark:text-neutral-300">
-                  此版本加入了全新的顶部导航栏.<br>加入的搜索功能.<br>加入新的库界面.<br>优化了在低性能设备上的表现.
+                  此版本加入了全新的顶部导航栏.<br>加入的搜索功能.<br>加入新的库界面.<br>更新了签名随机切换的功能<br>为壁纸增添一层遮罩（已停用：严重bug<br>优化了在低性能设备上的表现.
                 </p>
 
                 <div class="pt-3 border-t border-neutral-200/30 dark:border-neutral-800/30 flex justify-between items-center text-[12px]">
