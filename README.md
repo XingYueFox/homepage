@@ -2,7 +2,7 @@
 
 这是一个基于 [SRInternet 开发的 Home_Page](https://github.com/SRInternet/Home_Page/tree/master)的二次创作版本。
 
-<img width="1653" height="930" alt="image" src="https://github.com/user-attachments/assets/4af70378-e50f-40b6-98e0-8dfb59019de8" />
+<img width="1690" height="951" alt="image" src="https://github.com/user-attachments/assets/f2cb7e43-af97-4c67-85d1-74eaea0f2cf5" />
 
 
 ## 🔄 新增功能
