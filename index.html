@@ -1203,16 +1203,6 @@
           signatureEl.textContent = signatures[randomIndex];
         }
 
-        //实现点击切换签名
-        if (signatureEl) {  
-          const getRandomSignature = () => signatures[Math.floor(Math.random() * signatures.length)];  
-          signatureEl.textContent = getRandomSignature();  
-          signatureEl.style.cursor = "pointer";  
-          signatureEl.title = "点击切换签名";  
-          signatureEl.addEventListener("click", () => {  
-            signatureEl.textContent = getRandomSignature();
-          });
-        }
         // --- 全局状态管理与初始值加载 ---
         let isMinimalMode = false;
         let isBgVisible = localStorage.getItem("bg-visible") !== "false";
